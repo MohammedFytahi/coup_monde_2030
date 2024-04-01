@@ -15,7 +15,7 @@ class TeamController extends Controller
     public function index()
     {
         $teams = Team::all();
-        return view('teams.index', compact('teams'));
+        return response()->view('teams.index', compact('teams'));
     }
 
     /**
@@ -41,18 +41,22 @@ class TeamController extends Controller
             'country' => 'required|string',
             'flag' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Ajout de la validation pour le drapeau
         ]);
-
+    
         $teamData = $request->except('flag');
-
+    
         // Traitement de l'image du drapeau
         if ($request->hasFile('flag')) {
-            $imagePath = $request->file('flag')->store('flags', 'public');
-            $teamData['flag'] = $imagePath;
+            $image = $request->file('flag');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('flags'), $imageName);
+            $teamData['flag'] = 'flags/' . $imageName;
         }
-
+    
         Team::create($teamData);
-
+    
         return redirect()->route('teams.index')
                          ->with('success', 'Équipe créée avec succès.');
     }
+    
+    
 }

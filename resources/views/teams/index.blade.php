@@ -6,7 +6,8 @@
             <div class="clubs">
                 @foreach($teams as $team)
                 <div class="club">
-                    <img class="club-logo" src="{{ asset('storage/' . $team->flag) }}" alt="{{ $team->name }}">
+                    <img class="club-logo" src="{{ asset(''. $team->flag) }}" alt="{{ $team->name }}">
+
                     <h4>{{ $team->name }}</h4>
                 </div>
                 @endforeach
