@@ -11,8 +11,8 @@
             <ul class="flex font-semibold">
                 <!-- Active Link = text-yellow-400, Inactive Link = hover:text-yellow-400 -->
                 <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Matches</a></li>
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Teams</a></li>
+                <li class="mx-4"><a href="{{ route('matches.index') }}" class="text-yellow-400 hover:text-yellow-400">Matches</a></li>
+                <li class="mx-4"><a href="{{ route('teams.index') }}" class="text-yellow-400 hover:text-yellow-400">Teams</a></li>
                 <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Players</a></li>
                 <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">About</a></li>
                 <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Contact</a></li>

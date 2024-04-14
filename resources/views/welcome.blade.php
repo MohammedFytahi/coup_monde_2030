@@ -53,31 +53,31 @@
             </div>
             <div class="club">
                 <img class="club-logo"
-                    src="https://img01.products.bt.co.uk/content/dam/bt/portal/images/logos/sport/football/team/england/Brighton_and_Hove_Albion.png"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1LGFN2lH2bthaI-J6UIikoghH54gyfI7KchfW8E2qug&s"
                     alt="">
-                <h4>Brighton & Hove Albion</h4>
+                <h4>Argentina</h4>
             </div>
             <div class="club">
                 <img class="club-logo"
-                    src="https://img01.products.bt.co.uk/content/dam/bt/portal/images/logos/sport/football/team/england/Burnley.png"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwdvqGPTWEKrbtHyNk3v-6a_9ue6tWIjiUGEGTVyIEUA&s"
                     alt="">
-                <h4>Burnley</h4>
+                <h4>Ecuador</h4>
             </div>
             <div class="club">
                 <img class="club-logo"
-                    src="https://img01.products.bt.co.uk/content/dam/bt/portal/images/logos/sport/football/team/england/Chelsea.png"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_Palestine.svg/800px-Flag_of_Palestine.svg.png"
                     alt="">
-                <h4>Chelsea</h4>
+                <h4>palestine</h4>
             </div>
             <div class="club">
                 <img class="club-logo"
-                    src="https://img01.products.bt.co.uk/content/dam/bt/portal/images/logos/sport/football/team/england/Crystal_Palace.png"
+                    src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTIjmGjaRVD2FMGb-e1JOXlAAMIXWVntEW0IGb96d8pat2yY_C-qWCbYwyisKIIzVyrUq6sLhfXoTM9v4pv9MhY2-1keeWBb42OI3BNDgILrt0S0_tE_dzYnO2Ko8dsOr08v2TsNPg&usqp=CAc"
                     alt="">
                 <h4>Crystal Palace</h4>
             </div>
             <div class="club">
                 <img class="club-logo"
-                    src="https://img01.products.bt.co.uk/content/dam/bt/portal/images/logos/sport/football/team/england/Everton.png"
+                    src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSpkZJLseCe1f6aaP0F2n27glYDYQLy3yhZZYTLme3itlY-96wRDUjmeCsszQtaiWL3wYZAkCwm0MnTg9ZMEtu8EAHT_E3PeaVVkUeueLKVGaCtSEDHdDjgNh_IWFQeEe7Mib9MKEY&usqp=CAc"
                     alt="">
                 <h4>Everton</h4>
             </div>
@@ -205,6 +205,37 @@
             </div>
         </article>
     </section>
+    <section class="flexible">
+        <div class="fixture-header">
+            <h3>Todays Matches</h3>
+            <a class="link-button" target="_blank" href="https://www.goal.com/en-in/live-scores">Live</a>
+        </div>
+        <p>Live Football Scores, Fixtures & Results</p>
+        <div class="fixture-name">
+            <h3>UEFA CHAMPIONS LEAGUE</h3>
+            <div class="fixtures">
+                <div class="fixture">
+                    <h4 id="orange-color" class="status">29'</h4>
+                    <p>Kairat 1 - 0 Maccabi Haifa</p>
+                </div>
+                <hr>
+                <div class="fixture">
+                    <h4 class="status">21:00</h4>
+                    <p>Kairat 1 - 0 Maccabi Haifa</p>
+                </div>
+                <hr>
+                <div class="fixture">
+                    <h4 class="status">23:00</h4>
+                    <p>Kairat 1 - 0 Maccabi Haifa</p>
+                </div>
+                <hr>
+                <div class="fixture">
+                    <h4 class="status">00:00</h4>
+                    <p>Kairat 1 - 0 Maccabi Haifa</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Footer Section -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto text-center">
@@ -216,7 +247,10 @@
                 <a href="#" class="text-xl mr-4"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
+        
     </footer>
+
+    
 
 </body>
 <style>

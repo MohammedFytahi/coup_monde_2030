@@ -3,22 +3,20 @@
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
         <div class="nav-logo">
-            <!-- Replace 'logo.png' with your actual logo file -->
+
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-24">
         </div>
-        <!-- Navigation links -->
+
         <div class="nav-links">
             <ul class="flex font-semibold">
-                <!-- Active Link = text-yellow-400, Inactive Link = hover:text-yellow-400 -->
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Matches</a></li>
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Teams</a></li>
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Players</a></li>
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">About</a></li>
-                <li class="mx-4"><a href="#" class="text-yellow-400 hover:text-yellow-400">Contact</a></li>
+                <li class="mx-4"><a href="{{ route('login') }}" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
+                <li class="mx-4"><a href="{{ route('matches.index') }}" class="text-yellow-400 hover:text-yellow-400">Matches</a></li>
+                <li class="mx-4"><a href="{{ route('teams.index') }}" class="text-yellow-400 hover:text-yellow-400">Teams</a></li>
+                <li class="mx-4"><a href="{{ route('login') }}" class="text-yellow-400 hover:text-yellow-400">Players</a></li>
+                <li class="mx-4"><a href="{{ route('login') }}" class="text-yellow-400 hover:text-yellow-400">About</a></li>
+                <li class="mx-4"><a href="{{ route('login') }}" class="text-yellow-400 hover:text-yellow-400">Contact</a></li>
             </ul>
         </div>
-        <!-- Authentication buttons -->
         <div class="nav-auth-buttons">
             @auth
                 <div class="sm:fixed sm:top-[-11px] sm:right-0 p-6 text-right z-10">
@@ -38,4 +36,4 @@
             @endauth
         </div>
     </div>
-</nav>
+</nav>  
