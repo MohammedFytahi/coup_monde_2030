@@ -6,6 +6,7 @@ use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,8 @@ Route::get('/matches/{match}/edit', [MatchController::class, 'edit'])->name('mat
 Route::put('/matches/{match}', [MatchController::class, 'update'])->name('matches.update');
 Route::delete('/matches/{match}', [MatchController::class, 'destroy'])->name('matches.destroy');
 
+Route::post('/reserve-ticket/{match_id}', [TicketController::class,'reserveTicket'])->name('reserve-ticket');
+Route::get('/ticket-confirmation/{ticket_id}', [TicketController::class, 'ticketConfirmation'])->name('ticket-confirmation');
 
 
 require __DIR__.'/auth.php';
