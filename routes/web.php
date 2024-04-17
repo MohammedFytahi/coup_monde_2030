@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CycleEducativeController;
 use App\Http\Controllers\MatiereController;
 use App\Http\Controllers\TeamController;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,7 @@ use App\Http\Controllers\TicketController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 
 
@@ -53,9 +55,9 @@ Route::put('/stadiums/{id}', [StadiumController::class, 'update'])->name('stadiu
 
 
 
-Route::get('/matches', [MatchController::class, 'index'])->name('matches.index');
-Route::get('/matches/create', [MatchController::class, 'create'])->name('matches.create');
-Route::post('/matches/store', [MatchController::class, 'store'])->name('matches.store');
+// Route::get('/matches', [MatchController::class, 'index'])->name('matches.index');
+// Route::get('/matches/create', [MatchController::class, 'create'])->name('matches.create');
+// Route::post('/matches/store', [MatchController::class, 'store'])->name('matches.store');
 
 Route::get('/matches/{match}/edit', [MatchController::class, 'edit'])->name('matches.edit');
 Route::put('/matches/{match}', [MatchController::class, 'update'])->name('matches.update');
@@ -64,5 +66,16 @@ Route::delete('/matches/{match}', [MatchController::class, 'destroy'])->name('ma
 Route::post('/reserve-ticket/{match_id}', [TicketController::class,'reserveTicket'])->name('reserve-ticket');
 Route::get('/ticket-confirmation/{ticket_id}', [TicketController::class, 'ticketConfirmation'])->name('ticket-confirmation');
 
+Route::post('/tickets/download-pdf/{ticket_id}', [TicketController::class, 'generatePDF'])->name('tickets.download-pdf');
 
+Route::get('/matches/{matchId}/add-scores', [MatchController::class, 'create_result'])->name('match_results.create');
+Route::post('/matches/{matchId}/add-scores', [MatchController::class, 'store_result'])->name('match_results.store');
+
+Route::get('/match_results/{match}', [MatchController::class, 'show'])->name('match_results.show');
+
+Route::get('/admin/dashboard',[AdminController::class,'index'])->name('dashboard');
+
+
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 require __DIR__.'/auth.php';

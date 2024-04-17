@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class TicketController extends Controller
 {
@@ -35,4 +37,28 @@ class TicketController extends Controller
 
         return view('tickets.ticket-confirmation', compact('tickets'));
     }
+
+
+
+    public function generatePDF($ticket_id)
+    {
+        $tickets = Ticket::findOrFail($ticket_id);
+        
+        // Générer la vue avec le ticket spécifique
+        $html = view('tickets.ticket-confirmation', compact('tickets'))->render();
+    
+        // Charger le HTML dans Dompdf
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+    
+        // Rendre le PDF
+        $dompdf->render();
+    
+        // Télécharger le PDF
+        return $dompdf->stream("ticket_confirmation.pdf");
+    }
+    
+
+
+
 }

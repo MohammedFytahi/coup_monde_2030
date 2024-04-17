@@ -10,7 +10,7 @@
         <div class="nav-links hidden md:flex flex-grow justify-center font-semibold">
             <ul class="flex">
                 <!-- Active Link = text-yellow-400, Inactive Link = hover:text-yellow-400 -->
-                <li class="mx-2"><a href="#" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
+                <li class="mx-2"><a href="{{route('home')}}" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
                 <li class="mx-2"><a href="{{ route('matches.index') }}" class="text-yellow-400 hover:text-yellow-400">Matches</a></li>
                 <li class="mx-2"><a href="{{ route('teams.index') }}" class="text-yellow-400 hover:text-yellow-400">Teams</a></li>
                 <li class="mx-2"><a href="#" class="text-yellow-400 hover:text-yellow-400">Players</a></li>

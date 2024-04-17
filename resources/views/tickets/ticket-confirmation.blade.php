@@ -9,7 +9,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         .ticket-background {
-            background-image: url('https://sites.duke.edu/wcwp/files/2018/05/Coupe-du-Monde.jpeg'); /* Remplacez l'URL par l'URL de votre image de fond */
+            background-image: url('https://sites.duke.edu/wcwp/files/2018/05/Coupe-du-Monde.jpeg');
+            /* Remplacez l'URL par l'URL de votre image de fond */
             background-size: cover;
             background-position: center;
             brightness: 0.5;
@@ -26,32 +27,39 @@
         <h1 class="text-3xl font-bold mb-8">Ticket Confirmation</h1>
 
         @foreach ($tickets as $ticket)
-            <div class="ticket-background bg-gradient-to-r from-blue-400 to-indigo-600 rounded-lg shadow-md p-6 mb-6 max-w-2xl white-text">
-                <div class="flex justify-between items-center mb-4">
+        <div class="ticket-background bg-gradient-to-r from-blue-400 to-indigo-600 rounded-lg shadow-md p-6 mb-6 max-w-2xl white-text">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h2 class="text-xl font-bold">Match Date: {{ $ticket->match->date }}</h2>
+                    <p class="text-gray-600 flex items-center">
+                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($ticket->match->team1->flag))) }}" alt="{{ $ticket->match->team1->name }}" class="w-8 h-8 mr-2">
+                        {{ $ticket->match->team1->name }}
+                        <span class="mx-1">&bull;</span>
+                        {{ $ticket->match->team2->name }}
+                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($ticket->match->team2->flag))) }}" alt="{{ $ticket->match->team2->name }}" class="w-8 h-8 ml-2">
+                    </p>
+                </div>
+                <div class="flex items-center">
                     <div>
-                        <h2 class="text-xl font-bold">Match Date: {{ $ticket->match->date }}</h2>
-                        <p class="text-gray-600 flex items-center">
-                            <img src="{{ asset($ticket->match->team1->flag) }}" alt="{{ $ticket->match->team1->name }}" class="w-8 h-8 mr-2">
-                            {{ $ticket->match->team1->name }}
-                            <span class="mx-1">&bull;</span>
-                            {{ $ticket->match->team2->name }}
-                            <img src="{{ asset($ticket->match->team2->flag) }}" alt="{{ $ticket->match->team2->name }}" class="w-8 h-8 ml-2">
-                        </p>
+                        <p class="text-lg font-semibold"><i class="fas fa-map-marker-alt mr-2"></i> Stadium:
+                            {{ $ticket->match->stadium->name }}</p>
+                        <p class="text-lg font-semibold"><i class="fas fa-clock mr-2"></i> Match Time:
+                            {{ $ticket->match->time }}</p>
+                        <p class="text-lg font-semibold"><i class="fas fa-money-bill mr-2"></i> Price:
+                            {{ $ticket->match->price }}</p>
                     </div>
-                    <div class="flex items-center">
-                        <div>
-                            <p class="text-lg font-semibold"><i class="fas fa-map-marker-alt mr-2"></i> Stadium:
-                                {{ $ticket->match->stadium->name }}</p>
-                            <p class="text-lg font-semibold"><i class="fas fa-clock mr-2"></i> Match Time:
-                                {{ $ticket->match->time }}</p>
-                            <p class="text-lg font-semibold"><i class="fas fa-money-bill mr-2"></i> Price:
-                                {{ $ticket->match->price }}</p>
-                        </div>
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=YourDataHere" alt="QR Code" class="w-16 h-16 ml-6">
-                    </div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=YourDataHere" alt="QR Code" class="w-16 h-16 ml-6">
                 </div>
             </div>
+        </div>
         @endforeach
+
+        <!-- Formulaire de téléchargement du PDF -->
+        <form action="{{ route('tickets.download-pdf', ['ticket_id' => $tickets[0]->id]) }}" method="POST" class="text-center">
+            @csrf
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Télécharger le PDF</button>
+        </form>
+
     </div>
 </body>
 
