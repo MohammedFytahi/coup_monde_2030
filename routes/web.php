@@ -78,4 +78,17 @@ Route::get('/admin/dashboard',[AdminController::class,'index'])->name('dashboard
 
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/artiles/index',[ArticleController::class,'index'])->name('articles.index');
+
+
+Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
+Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+
+
+
+Route::post('/articles/{id}/like', [ArticleController::class, 'like']);
+Route::post('/articles/{id}/dislike', [ArticleController::class, 'dislike']);
+
+Route::get('/articles/search', [ArticleController::class, 'search'])->name('articles.search');
+
 require __DIR__.'/auth.php';

@@ -54,68 +54,91 @@
             
            
                     <a id="addMatchBtn" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="javascript:;"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Add New Card</a>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        @foreach ($matches as $match)
-                            <div class="bg-white border border-gray-300 rounded-lg overflow-hidden shadow-md">
-                                <div class="flex justify-between p-4">
-                                    <img src="{{ asset($match->team1->flag) }}" alt="{{ $match->team1->name }}" class="w-12 h-auto">
-                                    <img src="{{ asset($match->team2->flag) }}" alt="{{ $match->team2->name }}" class="w-12 h-auto">
-                                </div>
-                                <div class="p-4">
-                                    <h3 class="text-xl font-semibold">{{ $match->team1->name }} vs {{ $match->team2->name }}</h3>
-                                    <p class="text-gray-500 mb-2">{{ $match->date }}</p>
-                                    <p class="text-gray-700 mb-2">Stadium: {{ $match->stadium->name }}</p>
-                                    <p class="text-gray-700 mb-2">Price: {{ $match->price }}</p>
-                                    <p class="text-gray-700 mb-2" id="matchTimer{{ $match->id }}"></p>
-                                    @if ($match->result)
-                                        <p class="text-gray-700 mb-2">Result: {{ $match->result }}</p>
-                                    @endif
-                                </div>
-                                <div class="flex justify-between p-4">
-                                    @if (auth()->user() && auth()->user()->role == 'admin')
-                                        <a href="{{ route('matches.edit', $match->id) }}"
-                                            class="text-blue-500 hover:text-blue-700">Edit</a>
-                                        <form action="{{ route('matches.destroy', $match->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
-                                        </form>
-                                    @endif
-                                    @if ($match->result)
-                                        <a href="{{ route('match_results.show', $match->id) }}"
-                                            class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">View
-                                            Result</a>
-                                    @else
-                                        @if ($match->matchResults()->exists())
-                                            <a href="{{ route('match_results.show', $match->id) }}"
-                                                class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">View
-                                                Result</a>
-                                        @else
-                                            <a href="{{ route('match_results.create', $match->id) }}"
-                                                class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out">
-                                                Add Result
-                                            </a>
-                                        @endif
-                                    @endif
-                                    @if (auth()->user() && auth()->user()->role == 'utilisateur')
-                                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md flex items-center transition duration-300 ease-in-out">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10 2a1 1 0 0 1 .789.384l9 12a1 1 0 0 1-1.578 1.232L10 14.732l-7.211 9.884A1 1 0 0 1 1 23a1 1 0 0 1-.8-1.6l9-12A1 1 0 0 1 10 2zm0 7a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0v-5a1 1 0 0 1 1-1z" clip-rule="evenodd" />
-                                        </svg>
-                                        Réserver
-                                    </button>
-                                    
-                                    @endif
-                                </div>
-                                <form id="reservationForm{{ $match->id }}" class="hidden" action="{{ route('reserve-ticket', ['match_id' => $match->id]) }}" method="POST">
-                                    @csrf
-                                    <input type="number" id="quantity" name="quantity" min="1" required class="w-16 px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500">
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Réserver</button>
-                                </form>
-                            </div>
-                        @endforeach
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                @foreach ($matches as $match)
+                    <div class=" match-card bg-white border border-gray-300 rounded-lg overflow-hidden shadow-md">
+                        <div class="flex justify-between p-4">
+                            <img src="{{ asset($match->team1->flag) }}" alt="{{ $match->team1->name }}">
+                            <img src="{{ asset($match->team2->flag) }}" alt="{{ $match->team2->name }}">
+                        </div>
+                        <div class="match-details">
+                            <h3>{{ $match->team1->name }} vs {{ $match->team2->name }}</h3>
+                            <p class="text-gray-500 mb-2">{{ $match->date }}</p>
+                            <p class="text-gray-700 mb-2">Stadium: {{ $match->stadium->name }}</p>
+                            <p class="text-gray-700 mb-2">Price: {{ $match->price }}</p>
+                            <p class="text-gray-700 mb-2" id="matchTimer{{ $match->id }}"></p>
+                            @if ($match->result)
+                                <p class="text-gray-700 mb-2">Result: {{ $match->result }}</p>
+                            @endif
+                        </div>
+                        <div class="match-actions">
+                            @if (auth()->user() && auth()->user()->role == 'admin')
+        <a href="{{ route('matches.edit', $match->id) }}"
+            class="text-blue-500 hover:text-blue-700 inline-block px-3 py-1 rounded-md border border-blue-500 hover:bg-blue-500 hover:text-white">Edit</a>
+
+        <form action="{{ route('matches.destroy', $match->id) }}" method="POST" class="inline-block">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                class="text-red-500 hover:text-red-700 inline-block px-3 py-1 rounded-md border border-red-500 hover:bg-red-500 hover:text-white">Delete</button>
+        </form>
+    @endif
+
+    @if ($match->result)
+    <a href="{{ route('match_results.show', $match->id) }}"
+        class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">View
+        Result</a>
+@else
+    @if ($match->matchResults()->exists())
+        <a href="{{ route('match_results.show', $match->id) }}"
+            class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">View
+            Result</a>
+    @else
+        <a href="{{ route('match_results.create', $match->id) }}"
+            class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">
+            Add Result
+        </a>
+    @endif
+@endif
+
+
+                            
+@if (auth()->user() && auth()->user()->role == 'utilisateur')
+<button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out mb-2 inline-flex items-center"
+        onclick="toggleReservationForm({{ $match->id }})">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14l7-3m7 3l-7 3" />
+    </svg>
+    Réserver
+</button>
+@endif
+
+
+                            <form id="reservationForm{{ $match->id }}" class="hidden"
+                                action="{{ route('reserve-ticket', ['match_id' => $match->id]) }}" method="POST">
+                                @csrf
+                                <input type="number" id="quantity" name="quantity" min="1" required
+                                    class="w-16 px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500">
+                                <button type="submit"
+                                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Réserver</button>
+                            </form>
+
+                        </div>
+                        {{-- <form id="scoreForm{{ $match->id }}" class="hidden"
+                            action="{{ route('add-scores', $match->id) }}" method="POST">
+                            @csrf
+                            <!-- Champ pour le score de l'équipe 1 -->
+                            <input type="number" name="team1_score" placeholder="Team 1 Score" required>
+                            <!-- Champ pour le score de l'équipe 2 -->
+                            <input type="number" name="team2_score" placeholder="Team 2 Score" required>
+                            <!-- Bouton pour soumettre le formulaire -->
+                            <button type="submit">Submit Scores</button>
+                        </form> --}}
                     </div>
-                    
+                @endforeach
+            </div>
+        </div>
 
 
         <!-- Modale pour ajouter un match -->
