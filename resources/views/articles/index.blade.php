@@ -1,8 +1,4 @@
 <x-app :title="'Articles'">
-    {{-- <form id="search-form">
-        <input type="text" name="query" id="query" placeholder="Rechercher des articles...">
-        <button type="submit">Rechercher</button>
-    </form> --}}
 
     <section id="search-results" class="players">
         @foreach ($articles as $article)

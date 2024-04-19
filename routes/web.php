@@ -9,6 +9,7 @@ use App\Http\Controllers\StadiumController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,5 +108,9 @@ Route::post('/articles/{id}/like', [ArticleController::class, 'like']);
 Route::post('/articles/{id}/dislike', [ArticleController::class, 'dislike']);
 
 Route::get('/articles/search', [ArticleController::class, 'search'])->name('articles.search');
+
+
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 require __DIR__.'/auth.php';
