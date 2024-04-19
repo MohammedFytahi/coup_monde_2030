@@ -39,26 +39,22 @@ class ArticleController extends Controller
         return redirect()->back()->with('success', 'Article ajouté avec succès.');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
         ]);
-
-        $article = Article::findOrFail($id);
-        $article->title = $request->title;
-        $article->content = $request->content;
-
-        if ($request->hasFile('image')) {
-            $imagepath = $request->file('image')->store('article_images');
-            $article->image = $imagepath;
-        }
-
-        $article->save();
-        return response()->json(['message' => 'Article mis à jour avec succès.']);
+    
+        // Mettre à jour les données de l'article
+        $article->update($validatedData);
+    
+        // Rediriger l'utilisateur vers la page des articles avec un message de succès
+        return redirect()->route('articles.index')->with('success', 'Article mis à jour avec succès.');
     }
+    
+    
 
     public function destroy($id)
     {
@@ -105,17 +101,25 @@ class ArticleController extends Controller
     }
 
     public function search(Request $request)
-{
-    $query = $request->input('query');
-
-
-    $articles = Article::where('title', 'like', "%$query%")
-                        ->orWhere('content', 'like', "%$query%")
-                        ->get();
-
-    return response()->json(['articles' => $articles]);
-}
+    {
+        $query = $request->input('query');
+    
+        $articles = Article::where('title', 'like', "%$query%")
+                            ->orWhere('content', 'like', "%$query%")
+                            ->get();
+    
+        // Ajouter le chemin d'accès complet des images aux articles
+        $articles->transform(function ($article) {
+            $article->image = asset($article->image);
+            $article->isAdmin = (auth()->user() && auth()->user()->role == 'admin');
+            $article->isUser = (auth()->user() && auth()->user()->role == 'utilisateur');
+            return $article;
+        });
+    
+        return response()->json(['articles' => $articles]);
+    }
 
     
-    
+
+
 }

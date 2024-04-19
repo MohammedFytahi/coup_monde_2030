@@ -45,10 +45,20 @@
         background-color: #4b5563;
     }
 </style>
+
+
 </head>
+
+
 
 <body class="bg-gray-100 font-sans">
     <x-app title="Matches">
+        <div class="flex justify-center mb-4">
+            <button onclick="filterMatchesByStatus('all')" class="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">All</button>
+            <button onclick="filterMatchesByStatus('not-played-yet')" class="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Not Played Yet</button>
+            <button onclick="filterMatchesByStatus('playing')" class="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Playing</button>
+            <button onclick="filterMatchesByStatus('played')" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Played</button>
+        </div>
         <div class="container mx-auto px-4 py-8">
             <h2 class="text-3xl font-bold mb-4">Matches</h2>
             
@@ -56,7 +66,8 @@
                     <a id="addMatchBtn" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="javascript:;"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Add New Card</a>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @foreach ($matches as $match)
-                    <div class=" match-card bg-white border border-gray-300 rounded-lg overflow-hidden shadow-md">
+               
+                    <div class=" match-card   glass shadow-xl overflow-hidden shadow-md">
                         <div class="flex justify-between p-4">
                             <img src="{{ asset($match->team1->flag) }}" alt="{{ $match->team1->name }}">
                             <img src="{{ asset($match->team2->flag) }}" alt="{{ $match->team2->name }}">
@@ -263,6 +274,10 @@
             </div>
         </div>
 
+
+
+   
+
     </x-app>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -278,23 +293,30 @@
         });
 
         function updateMatchTimer(matchDate, matchId) {
-            // Récupérer l'élément de compteur de temps par son ID
-            var timerElement = document.getElementById('matchTimer' + matchId);
+    // Récupérer l'élément de compteur de temps par son ID
+    var timerElement = document.getElementById('matchTimer' + matchId);
 
-            // Calculer le temps restant jusqu'au début du match
-            var currentDate = new Date();
-            var startDate = new Date(matchDate);
-            var timeDiff = startDate.getTime() - currentDate.getTime();
-            var seconds = Math.floor(timeDiff / 1000);
+    // Calculer le temps restant jusqu'au début du match
+    var currentDate = new Date();
+    var startDate = new Date(matchDate);
+    var timeDiff = startDate.getTime() - currentDate.getTime();
+    var seconds = Math.floor(timeDiff / 1000);
 
-            // Calculer les heures, minutes et secondes restantes
-            var hours = Math.floor(seconds / 3600);
-            var minutes = Math.floor((seconds % 3600) / 60);
-            seconds = seconds % 60;
+    // Calculer les heures, minutes et secondes restantes
+    var hours = Math.floor(seconds / 3600);
+    var minutes = Math.floor((seconds % 3600) / 60);
+    seconds = seconds % 60;
 
-            // Mettre à jour le texte du compteur de temps
-            timerElement.textContent = 'Time Remaining: ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
-        }
+    // Mettre à jour le texte du compteur de temps
+    timerElement.innerHTML = `
+        <span class="countdown font-mono text-2xl">
+            <span style="--value:${hours};">${hours}</span>h
+            <span style="--value:${minutes};">${minutes}</span>m
+            <span style="--value:${seconds};">${seconds}</span>s
+        </span>`;
+        
+}
+
 
         // Mettre à jour le compteur de temps pour chaque match
         @foreach ($matches as $match)
@@ -317,4 +339,7 @@
             var form = document.getElementById('scoreForm' + matchId);
             form.classList.toggle('hidden');
         }
+
+
+        
     </script>

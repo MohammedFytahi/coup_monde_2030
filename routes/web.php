@@ -25,11 +25,40 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::middleware('role:admin')->group(function () {
+    Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
+    Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
 
+    Route::get('/matches/create', [MatchController::class, 'create'])->name('matches.create');
+Route::post('/matches/store', [MatchController::class, 'store'])->name('matches.store');
+
+
+Route::get('/stadiums/create', [StadiumController::class, 'create'])->name('stadiums.create');
+Route::post('/stadiums', [StadiumController::class, 'store'])->name('stadiums.store');
+Route::put('/stadiums/{id}/edit',[StadiumController::class, 'edit'])->name('stadiums.edit');
+Route::put('/stadiums/{id}', [StadiumController::class, 'update'])->name('stadiums.update');
+
+Route::get('/matches/{match}/edit', [MatchController::class, 'edit'])->name('matches.edit');
+Route::put('/matches/{match}', [MatchController::class, 'update'])->name('matches.update');
+Route::delete('/matches/{match}', [MatchController::class, 'destroy'])->name('matches.destroy');
+
+
+Route::get('/matches/{matchId}/add-scores', [MatchController::class, 'create_result'])->name('match_results.create');
+Route::post('/matches/{matchId}/add-scores', [MatchController::class, 'store_result'])->name('match_results.store');
+
+
+Route::get('/admin/dashboard',[AdminController::class,'index'])->name('dashboard');
+
+
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+
+
+});
 
 Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
-Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
-Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
+
 
 
 
@@ -39,16 +68,12 @@ Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
 
 
 Route::get('/matches', [MatchController::class, 'index'])->name('matches.index');
-Route::get('/matches/create', [MatchController::class, 'create'])->name('matches.create');
-Route::post('/matches/store', [MatchController::class, 'store'])->name('matches.store');
+
 
 
 
 Route::get('/stadiums', [StadiumController::class, 'index'])->name('stadiums.index');
-Route::get('/stadiums/create', [StadiumController::class, 'create'])->name('stadiums.create');
-Route::post('/stadiums', [StadiumController::class, 'store'])->name('stadiums.store');
-Route::put('/stadiums/{id}/edit',[StadiumController::class, 'edit'])->name('stadiums.edit');
-Route::put('/stadiums/{id}', [StadiumController::class, 'update'])->name('stadiums.update');
+
 
 
 
@@ -59,25 +84,17 @@ Route::put('/stadiums/{id}', [StadiumController::class, 'update'])->name('stadiu
 // Route::get('/matches/create', [MatchController::class, 'create'])->name('matches.create');
 // Route::post('/matches/store', [MatchController::class, 'store'])->name('matches.store');
 
-Route::get('/matches/{match}/edit', [MatchController::class, 'edit'])->name('matches.edit');
-Route::put('/matches/{match}', [MatchController::class, 'update'])->name('matches.update');
-Route::delete('/matches/{match}', [MatchController::class, 'destroy'])->name('matches.destroy');
+
 
 Route::post('/reserve-ticket/{match_id}', [TicketController::class,'reserveTicket'])->name('reserve-ticket');
 Route::get('/ticket-confirmation/{ticket_id}', [TicketController::class, 'ticketConfirmation'])->name('ticket-confirmation');
 
 Route::post('/tickets/download-pdf/{ticket_id}', [TicketController::class, 'generatePDF'])->name('tickets.download-pdf');
 
-Route::get('/matches/{matchId}/add-scores', [MatchController::class, 'create_result'])->name('match_results.create');
-Route::post('/matches/{matchId}/add-scores', [MatchController::class, 'store_result'])->name('match_results.store');
+
 
 Route::get('/match_results/{match}', [MatchController::class, 'show'])->name('match_results.show');
 
-Route::get('/admin/dashboard',[AdminController::class,'index'])->name('dashboard');
-
-
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::get('/artiles/index',[ArticleController::class,'index'])->name('articles.index');
 
 
