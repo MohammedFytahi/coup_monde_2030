@@ -111,6 +111,6 @@ Route::get('/articles/search', [ArticleController::class, 'search'])->name('arti
 
 
 
-Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/articles/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 require __DIR__.'/auth.php';

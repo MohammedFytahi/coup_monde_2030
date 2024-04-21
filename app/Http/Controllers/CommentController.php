@@ -15,19 +15,20 @@ class CommentController extends Controller
     return view('articles.comments', compact('id', 'comment'));
 }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'article_id' => 'required|exists:articles,id',
-            'content' => 'required',
-        ]);
+ public function store(Request $request)
+{
+    $request->validate([
+        'article_id' => 'required|exists:articles,id',
+        'content' => 'required',
+    ]);
 
-        $comment = new Comment();
-        $comment->article_id = $request->article_id;
-        $comment->user_id = auth()->id(); 
-        $comment->content = $request->content;
-        $comment->save();
+    $comment = new Comment();
+    $comment->article_id = $request->article_id;
+    $comment->user_id = auth()->id(); 
+    $comment->content = $request->content;
+    $comment->save();
 
-        return response()->json(['success' => true, 'message' => 'Commentaire ajouté avec succès']);
-    }
+    return response()->json(['success' => true, 'message' => 'Commentaire ajouté avec succès']);
+}
+
 }

@@ -29,8 +29,8 @@
                         <i class="far fa-thumbs-down"></i> <span class="dislikes-count">{{ $article->dislikes }}</span>
                     </button>
                     
-                    <!-- Bouton "Commentaire" -->
-                    <button class="text-gray-500 focus:outline-none text-lg">
+               
+                    <button onclick="openCommentForm('{{ $article->id }}')" class="text-gray-500 focus:outline-none text-lg">
                         <i class="far fa-comment"></i>
                     </button>
                     @endif
@@ -43,7 +43,17 @@
         <!-- Les résultats de recherche seront affichés ici -->
     </div> --}}
     <div id="editArticleModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
-        <!-- Contenu du formulaire de modification -->
+    </div>
+    <div id="addCommentModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Ajouter un commentaire</h2>
+            <form id="addCommentForm" action="" method="POST">
+                @csrf
+                <textarea name="content" placeholder="Entrez votre commentaire ici" required></textarea>
+                <button type="submit">Ajouter</button>
+            </form>
+            <button onclick="closeCommentForm()">Annuler</button>
+        </div>
     </div>
     
     
@@ -69,7 +79,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.message === 'Likes updated successfully') {
-                        button.classList.toggle('liked'); // Ajouter ou supprimer la classe 'liked'
+                        button.classList.toggle('liked'); 
                         const likesCount = button.querySelector('.likes-count');
                         const newLikes = isLiked ? parseInt(likesCount.textContent) - 1 : parseInt(likesCount.textContent) + 1;
                         likesCount.textContent = newLikes;
@@ -98,7 +108,6 @@ dislikeButtons.forEach(button => {
         })
         .then(response => response.json())
         .then(data => {
-            // Mettre à jour l'affichage ou gérer d'autres actions nécessaires
         })
         .catch(error => {
             console.error('Erreur lors de la mise à jour des dislikes :', error);
@@ -114,15 +123,14 @@ searchForm.addEventListener('input', function(event) {
     fetch(`/articles/search?query=${query}`)
         .then(response => response.json())
         .then(data => {
-            // Effacer les résultats de recherche précédents
+
             searchResults.innerHTML = '';
 
-            // Afficher les nouveaux résultats de recherche
             data.articles.forEach(article => {
     const articleDiv = document.createElement('article');
     articleDiv.classList.add('player');
 
-    // Utilisation de la même structure HTML que celle des articles
+
     articleDiv.innerHTML = `
         <img src="${article.image}" alt="${article.title}">
         <div class="player-info">
@@ -169,7 +177,7 @@ searchForm.addEventListener('input', function(event) {
 
 
 function openEditModal(id, title, content) {
-        // Remplir les champs du formulaire avec les détails de l'article sélectionné
+
         document.getElementById('editArticleModal').innerHTML = `
             <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
             <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
@@ -207,5 +215,14 @@ function openEditModal(id, title, content) {
         // Cacher le formulaire de modification
         document.getElementById('editArticleModal').classList.add('hidden');
     }
+
+    function openCommentForm(articleId) {
+            document.getElementById('addCommentModal').classList.remove('hidden');
+            document.getElementById('addCom     mentForm').action = `/articles/${articleId}/comments`;
+        }
+
+        function closeCommentForm() {
+            document.getElementById('addCommentModal').classList.add('hidden');
+        }
     </script>
 </x-app>
