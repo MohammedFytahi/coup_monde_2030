@@ -95,10 +95,19 @@ public function create_result($matchId)
 
     public function show($id)
     {
-        // Récupérer le résultat du match en fonction de l'ID
+       
         $matchResult = Match_results::findOrFail($id);
 
         // Retourner la vue avec les détails du résultat du match
         return view('matches.show', ['matchResult' => $matchResult]);
+    }
+
+    public function showResults()
+    {
+        // Récupérer tous les matchs avec les résultats
+        $matches = Matche::has('matchResults')->get();
+
+        // Retourner la vue avec les données des matchs
+        return view('matches.results', ['matches' => $matches]);
     }
 }

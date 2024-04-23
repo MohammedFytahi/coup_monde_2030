@@ -49,4 +49,8 @@ class User extends Authenticatable
 {
     return $this->ban === '1';
 }
+public function articleLikes()
+{
+    return $this->hasMany(ArticleLike::class);
+}
 }

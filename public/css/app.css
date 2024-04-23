@@ -409,7 +409,7 @@ Club Style Ends
 }
 .status{
     margin-left: 20px;
-    width: 46px;
+    width: 100px;
     background-color: rgb(91, 163, 91);
     padding: 8px;
 }
@@ -716,9 +716,9 @@ Footer Style Ends
     .club{
         margin-bottom: 20px;
     }
-    /*----------------------
-    Club Style Ends
-    ---------------------- */
+ 
+
+    
 
 
 }

@@ -18,5 +18,5 @@ class Match_results extends Model
     public function match()
     {
         return $this->belongsTo(Matche::class, 'match_id');
-    }
+    }   
 }

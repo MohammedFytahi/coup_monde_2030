@@ -9,4 +9,12 @@ class Article extends Model
 {
     use HasFactory;
     protected $fillable = ['title', 'content', 'image'];
+    public function likes()
+    {
+        return $this->hasMany(ArticleLike::class);
+    }
+    // public function likesCount()
+    // {
+    //     return $this->likes()->count();
+    // }
 }

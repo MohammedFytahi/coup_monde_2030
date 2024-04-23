@@ -2,49 +2,71 @@
 
     <section id="search-results" class="players">
         @foreach ($articles as $article)
-        <article class="player hover:bg-black hover:text-white rounded-lg transition-all top-0 hover:scale-110" >
-            <img src="{{ asset($article->image) }}" alt="{{ $article->title }}">
-            <div class="player-info">
-                <h3>{{ $article->title }}</h3>
-                <p class="break-words">{{ $article->content }}</p>
-                <div class="flex items-center">
-                    <a class="link-button" href="#">Read More <i class="fas fa-angle-double-right"></i></a>
-                    @if (auth()->user() && auth()->user()->role == 'admin')
-                    <div class="ml-auto text-right">
-                        <a class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="javascript:;">
-                            <i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Delete
-                        </a>
-                        <a onclick="openEditModal('{{ $article->id }}', '{{ $article->title }}', '{{ $article->content }}')" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href="javascript:;">
-                            <i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit
-                        </a>
+            <article class="player hover:bg-black hover:text-white rounded-lg transition-all top-0 hover:scale-110">
+                <img src="{{ asset($article->image) }}" alt="{{ $article->title }}">
+                <div class="player-info">
+                    <h3>{{ $article->title }}</h3>
+                    <p class="break-words">{{ $article->content }}</p>
+                    <div class="flex items-center">
+                        <a class="link-button" href="#">Read More <i class="fas fa-angle-double-right"></i></a>
+                        @if (auth()->user() && auth()->user()->role == 'admin')
+                            <div class="ml-auto text-right">
+                                <a class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text"
+                                    href="javascript:;">
+                                    <i
+                                        class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Delete
+                                </a>
+                                <a onclick="openEditModal('{{ $article->id }}', '{{ $article->title }}', '{{ $article->content }}')"
+                                    class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700"
+                                    href="javascript:;">
+                                    <i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit
+                                </a>
+                            </div>
+                        @endif
+                        @if (auth()->user() && auth()->user()->role == 'utilisateur')
+                        <div class="flex items-center mt-4">
+                            <button class="like-button" data-article-id="{{ $article->id }}"
+                                data-likes="{{ $article->likes }}" onclick="updateLikesCount({{ $article->id }})">
+                                <i class="far fa-thumbs-up"></i>
+                                <span id="likes-count-{{ $article->id }}" class="ml-2">{{ $article->likesCount }}</span>
+                            </button>
+                            
+                            <a href="{{ route('articles.show', ['id' => $article->id]) }}" class="btn btn-primary ml-4">
+                                <i class="far fa-comment"></i>
+                            </a>
+                            
+                            {{-- Uncomment the following lines if you want to include dislike button and comment form --}}
+                            {{-- 
+                            <button class="dislike-button ml-4" data-article-id="{{ $article->id }}" data-dislikes="{{ $article->dislikes }}">
+                                <i class="far fa-thumbs-down"></i>
+                                <span class="ml-2">{{ $article->dislikes }}</span>
+                            </button>
+                    
+                            <button onclick="openCommentForm('{{ $article->id }}')" class="text-gray-500 focus:outline-none text-lg ml-4">
+                                <i class="far fa-comment"></i>
+                            </button>
+                            --}}
+                        </div>
+                    @endif
+                    
                     </div>
-                    @endif
-                    @if(auth()->user() && auth()->user()->role == 'utilisateur')
-                    <!-- Bouton "Like" -->
-                    <button class="like-button ml-20" data-article-id="{{ $article->id }}" data-likes="{{ $article->likes }}">
-                        <i class="far fa-thumbs-up"></i> <span class="likes-count">{{ $article->likes }}</span>
-                    </button>
-                    
-                    <button class="dislike-button" data-article-id="{{ $article->id }}" data-dislikes="{{ $article->dislikes }}">
-                        <i class="far fa-thumbs-down"></i> <span class="dislikes-count">{{ $article->dislikes }}</span>
-                    </button>
-                    
-               
-                    <button onclick="openCommentForm('{{ $article->id }}')" class="text-gray-500 focus:outline-none text-lg">
-                        <i class="far fa-comment"></i>
-                    </button>
-                    @endif
                 </div>
-            </div>
-        </article>
+            </article>
         @endforeach
     </section>
+    <form id="addCommentForm" action="{{ route('articles.comments.add', ['articleId' => $article->id]) }}" method="POST">
+        @csrf
+        <textarea name="content" placeholder="Entrez votre commentaire ici" required></textarea>
+        <button type="submit">Ajouter</button>
+    </form>
+    
+    
     {{-- <div id="search-results">
         <!-- Les résultats de recherche seront affichés ici -->
     </div> --}}
     <div id="editArticleModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
     </div>
-    <div id="addCommentModal" class="modal hidden">
+    {{-- <div id="addCommentModal" class="modal hidden">
         <div class="modal-content">
             <h2>Ajouter un commentaire</h2>
             <form id="addCommentForm" action="" method="POST">
@@ -54,84 +76,98 @@
             </form>
             <button onclick="closeCommentForm()">Annuler</button>
         </div>
-    </div>
-    
-    
+    </div> --}}
+
+
 
     <script>
-
+        
         const likeButtons = document.querySelectorAll('.like-button');
+     
 
+       
 
         likeButtons.forEach(button => {
-            button.addEventListener('input', function () {
+            button.addEventListener('click', function() {
                 const articleId = button.dataset.articleId;
                 const isLiked = button.classList.contains('liked');
 
                 fetch(`/articles/${articleId}/like`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ liked: !isLiked })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message === 'Likes updated successfully') {
-                        button.classList.toggle('liked'); 
-                        const likesCount = button.querySelector('.likes-count');
-                        const newLikes = isLiked ? parseInt(likesCount.textContent) - 1 : parseInt(likesCount.textContent) + 1;
-                        likesCount.textContent = newLikes;
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la mise à jour des likes :', error);
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            liked: !isLiked
+                        }) // Envoyer l'état de like actuel
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === 'Likes updated successfully') {
+                            button.classList.toggle('liked'); // Basculer l'état de like du bouton
+                            const likesCount = button.querySelector('.likes-count');
+                            const newLikes = isLiked ? parseInt(likesCount.textContent) - 1 : parseInt(
+                                likesCount.textContent) + 1;
+                            likesCount.textContent =
+                            newLikes; // Mettre à jour le nombre de likes affiché
+                            // Appel de la fonction pour mettre à jour le nombre de likes
+                            updateLikesCount(articleId);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la mise à jour des likes :', error);
+                    });
             });
         });
 
+
+    
+
+
+
         const dislikeButtons = document.querySelectorAll('.dislike-button');
 
-dislikeButtons.forEach(button => {
-    button.addEventListener('click', function () {
-        const articleId = button.dataset.articleId;
-        const isDisliked = button.classList.contains('disliked');
+        dislikeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const articleId = button.dataset.articleId;
+                const isDisliked = button.classList.contains('disliked');
 
-        fetch(`/articles/${articleId}/dislike`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ disliked: !isDisliked })
-        })
-        .then(response => response.json())
-        .then(data => {
-        })
-        .catch(error => {
-            console.error('Erreur lors de la mise à jour des dislikes :', error);
+                fetch(`/articles/${articleId}/dislike`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            disliked: !isDisliked
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {})
+                    .catch(error => {
+                        console.error('Erreur lors de la mise à jour des dislikes :', error);
+                    });
+            });
         });
-    });
-});
 
-const searchForm = document.getElementById('search-form');
-const searchResults = document.getElementById('search-results');
-searchForm.addEventListener('input', function(event) {
-    const query = event.target.value;
+        const searchForm = document.getElementById('search-form');
+        const searchResults = document.getElementById('search-results');
+        searchForm.addEventListener('input', function(event) {
+            const query = event.target.value;
 
-    fetch(`/articles/search?query=${query}`)
-        .then(response => response.json())
-        .then(data => {
+            fetch(`/articles/search?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
 
-            searchResults.innerHTML = '';
+                    searchResults.innerHTML = '';
 
-            data.articles.forEach(article => {
-    const articleDiv = document.createElement('article');
-    articleDiv.classList.add('player');
+                    data.articles.forEach(article => {
+                        const articleDiv = document.createElement('article');
+                        articleDiv.classList.add('player');
 
 
-    articleDiv.innerHTML = `
+                        articleDiv.innerHTML = `
         <img src="${article.image}" alt="${article.title}">
         <div class="player-info">
             <h3>${article.title}</h3>
@@ -139,46 +175,46 @@ searchForm.addEventListener('input', function(event) {
             <div class="flex items-center">
                 <a class="link-button" href="#">Read More <i class="fas fa-angle-double-right"></i></a>
                 ${article.isAdmin ? `
-                    <div class="ml-auto text-right">
-                        <a onclick="openEditModal('${article.id}', '${article.title}', '${article.content}')" class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="javascript:;">
-                            <i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Delete
-                        </a>
-                        <a onclick="openEditModal('${article.id}', '${article.title}', '${article.content}')" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href="javascript:;">
-                            <i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit
-                        </a>
-                    </div>
-                ` : ''}
+                        <div class="ml-auto text-right">
+                            <a onclick="openEditModal('${article.id}', '${article.title}', '${article.content}')" class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text" href="javascript:;">
+                                <i class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Delete
+                            </a>
+                            <a onclick="openEditModal('${article.id}', '${article.title}', '${article.content}')" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700" href="javascript:;">
+                                <i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit
+                            </a>
+                        </div>
+                    ` : ''}
                 ${article.isUser ? `
-                    <button class="like-button ml-20" data-article-id="" data-likes="">
-                    <i class="far fa-thumbs-up"></i> <span class="likes-count"></span>
-                </button>
-                
-                <button class="dislike-button" data-article-id="${article.id}" data-dislikes="${article.dislikes}">
-                    <i class="far fa-thumbs-down"></i> <span class="dislikes-count"></span>
-                </button>
-                
-                <button class="text-gray-500 focus:outline-none text-lg">
-                    <i class="far fa-comment"></i>
-                </button>
-                ` : ''}
+                        <button class="like-button ml-20" data-article-id="" data-likes="">
+                        <i class="far fa-thumbs-up"></i> <span class="likes-count"></span>
+                    </button>
+                    
+                    <button class="dislike-button" data-article-id="${article.id}" data-dislikes="${article.dislikes}">
+                        <i class="far fa-thumbs-down"></i> <span class="dislikes-count"></span>
+                    </button>
+                    
+                    <button class="text-gray-500 focus:outline-none text-lg">
+                        <i class="far fa-comment"></i>
+                    </button>
+                    ` : ''}
                 
             </div>
         </div>
     `;
 
-    searchResults.appendChild(articleDiv);
-});
+                        searchResults.appendChild(articleDiv);
+                    });
 
-        })
-        .catch(error => {
-            console.error('Erreur lors de la recherche :', error);
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la recherche :', error);
+                });
         });
-});
 
 
-function openEditModal(id, title, content) {
+        function openEditModal(id, title, content) {
 
-        document.getElementById('editArticleModal').innerHTML = `
+            document.getElementById('editArticleModal').innerHTML = `
             <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
             <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
                 <div class="modal-content py-4 text-left px-6">
@@ -206,17 +242,15 @@ function openEditModal(id, title, content) {
                 </div>
             </div>
         `;
-        // Afficher le formulaire de modification
-        document.getElementById('editArticleModal').classList.remove('hidden');
-    }
+           
+            document.getElementById('editArticleModal').classList.remove('hidden');
+        }
 
-    // Fonction pour fermer le formulaire de modification
-    function closeEditModal() {
-        // Cacher le formulaire de modification
-        document.getElementById('editArticleModal').classList.add('hidden');
-    }
+        function closeEditModal() {
+            document.getElementById('editArticleModal').classList.add('hidden');
+        }
 
-    function openCommentForm(articleId) {
+        function openCommentForm(articleId) {
             document.getElementById('addCommentModal').classList.remove('hidden');
             document.getElementById('addCom     mentForm').action = `/articles/${articleId}/comments`;
         }

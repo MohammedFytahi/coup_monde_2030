@@ -10,6 +10,7 @@ use App\Http\Controllers\MatchController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,11 +65,15 @@ Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
 
 
 
-
+Route::post('/articles/{articleId}/like',[LikeController::class,'toggleLike'] )->middleware('auth');
+Route::get('/articles/{articleId}/likes', [LikeController::class, 'getLikesCount']);
 
 
 
 Route::get('/matches', [MatchController::class, 'index'])->name('matches.index');
+Route::post('/articles/{articleId}/comments', [CommentController::class, 'addComment'])->name('articles.comments.add');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+
 
 
 
@@ -95,6 +100,7 @@ Route::post('/tickets/download-pdf/{ticket_id}', [TicketController::class, 'gene
 
 
 Route::get('/match_results/{match}', [MatchController::class, 'show'])->name('match_results.show');
+Route::get('/matches/results', [MatchController::class, 'showResults'])->name('matches.results');
 
 Route::get('/artiles/index',[ArticleController::class,'index'])->name('articles.index');
 

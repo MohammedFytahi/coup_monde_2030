@@ -15,20 +15,19 @@ class CommentController extends Controller
     return view('articles.comments', compact('id', 'comment'));
 }
 
- public function store(Request $request)
+public function addComment(Request $request, $articleId)
 {
-    $request->validate([
-        'article_id' => 'required|exists:articles,id',
-        'content' => 'required',
+    $validatedData = $request->validate([
+        'content' => 'required|string|max:255',
     ]);
 
     $comment = new Comment();
-    $comment->article_id = $request->article_id;
-    $comment->user_id = auth()->id(); 
-    $comment->content = $request->content;
+    $comment->article_id = $articleId;
+    $comment->user_id = auth()->user()->id; // Assuming you have authentication
+    $comment->content = $validatedData['content'];
     $comment->save();
 
-    return response()->json(['success' => true, 'message' => 'Commentaire ajouté avec succès']);
+    return redirect()->back()->with('success', 'Comment added successfully.');
 }
 
 }

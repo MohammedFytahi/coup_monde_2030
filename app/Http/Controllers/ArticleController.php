@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class ArticleController extends Controller
 {
@@ -119,7 +120,13 @@ class ArticleController extends Controller
         return response()->json(['articles' => $articles]);
     }
 
-    
+    public function show($id)
+    {
+        $article = Article::findOrFail($id);
+        $comments = Comment::where('article_id', $id)->get();
+         
+        return view('articles.show', compact('article', 'comments'));
+    }
 
 
 }
