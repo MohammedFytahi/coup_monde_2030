@@ -98,25 +98,35 @@
                                     <p class="text-gray-700 mb-2">Result: {{ $match->result }}</p>
                                 @endif
                             </div>
-                            <div class="match-actions">
+                             <div class="match-actions">
                                 @if (auth()->user() && auth()->user()->role == 'admin')
-                                    <a href="{{ route('matches.edit', $match->id) }}"
-                                        class="text-blue-500 hover:text-blue-700 inline-block px-3 py-1 rounded-md border border-blue-500 hover:bg-blue-500 hover:text-white">Edit</a>
+                                
+                                    <div class="m-5">
+                                        <a href="{{ route('matches.edit', $match->id) }}" class="flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                            
+                                  
+                                        
 
                                     <form action="{{ route('matches.destroy', $match->id) }}" method="POST"
                                         class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="text-red-500 hover:text-red-700 inline-block px-3 py-1 rounded-md border border-red-500 hover:bg-red-500 hover:text-white">Delete</button>
+                                            class="inline-block px-4 py-3 mb-0 font-bold text-center text-red-600 uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in hover:scale-102 active:opacity-85"> <i class="mr-2 far fa-trash-alt" aria-hidden="true"></i>Delete</button>
                                     </form>
                                 @endif
 
                                 @if ($match->date <= now() && auth()->user() && auth()->user()->role == 'admin')
                                 @if ($match->matchResults()->exists())
-                                        <a href="{{ route('match_results.show', $match->id) }}"
-                                            class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">View
-                                            Result</a>
+                                <a href="{{ route('match_results.show', $match->id) }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">
+                                    <i class="far fa-eye mr-2"></i> <!-- Ajoutez cette ligne pour l'icône d'œil -->
+                                  
+                                </a>
                                     @else
                                         <a href="{{ route('match_results.create', $match->id) }}"
                                             class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">

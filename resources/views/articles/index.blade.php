@@ -11,11 +11,10 @@
                         <a class="link-button" href="#">Read More <i class="fas fa-angle-double-right"></i></a>
                         @if (auth()->user() && auth()->user()->role == 'admin')
                             <div class="ml-auto text-right">
-                                <a class="relative z-10 inline-block px-4 py-3 mb-0 font-bold text-center text-transparent uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 bg-gradient-to-tl from-red-600 to-rose-400 hover:scale-102 active:opacity-85 bg-x-25 bg-clip-text"
-                                    href="javascript:;">
-                                    <i
-                                        class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-rose-400 bg-x-25 bg-clip-text"></i>Delete
+                                <a onclick="deleteArticle('{{ $article->id }}')" class="inline-block px-4 py-3 mb-0 font-bold text-center text-red-600 uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in hover:scale-102 active:opacity-85">
+                                    <i class="mr-2 far fa-trash-alt" aria-hidden="true"></i>Delete
                                 </a>
+                                
                                 <a onclick="openEditModal('{{ $article->id }}', '{{ $article->title }}', '{{ $article->content }}')"
                                     class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700"
                                     href="javascript:;">
@@ -31,21 +30,17 @@
                                 <span id="likes-count-{{ $article->id }}" class="ml-2">{{ $article->likesCount }}</span>
                             </button>
                             
-                            <a href="{{ route('articles.show', ['id' => $article->id]) }}" class="btn btn-primary ml-4">
-                                <i class="far fa-comment"></i>
-                            </a>
+                            <div class="flex items-center">
+                              
+                                <a href="{{ route('articles.show', ['id' => $article->id]) }}" class="btn btn-primary ml-4">
+                                    <i class="far fa-comment"></i>
+                                </a>
+                             
+                                <span class="ml-1">{{ $article->comments->count() }}</span>
                             
-                            {{-- Uncomment the following lines if you want to include dislike button and comment form --}}
-                            {{-- 
-                            <button class="dislike-button ml-4" data-article-id="{{ $article->id }}" data-dislikes="{{ $article->dislikes }}">
-                                <i class="far fa-thumbs-down"></i>
-                                <span class="ml-2">{{ $article->dislikes }}</span>
-                            </button>
-                    
-                            <button onclick="openCommentForm('{{ $article->id }}')" class="text-gray-500 focus:outline-none text-lg ml-4">
-                                <i class="far fa-comment"></i>
-                            </button>
-                            --}}
+                            </div>
+                            
+                          
                         </div>
                     @endif
                     
@@ -54,29 +49,12 @@
             </article>
         @endforeach
     </section>
-    <form id="addCommentForm" action="{{ route('articles.comments.add', ['articleId' => $article->id]) }}" method="POST">
-        @csrf
-        <textarea name="content" placeholder="Entrez votre commentaire ici" required></textarea>
-        <button type="submit">Ajouter</button>
-    </form>
+ 
     
-    
-    {{-- <div id="search-results">
-        <!-- Les résultats de recherche seront affichés ici -->
-    </div> --}}
+
     <div id="editArticleModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
     </div>
-    {{-- <div id="addCommentModal" class="modal hidden">
-        <div class="modal-content">
-            <h2>Ajouter un commentaire</h2>
-            <form id="addCommentForm" action="" method="POST">
-                @csrf
-                <textarea name="content" placeholder="Entrez votre commentaire ici" required></textarea>
-                <button type="submit">Ajouter</button>
-            </form>
-            <button onclick="closeCommentForm()">Annuler</button>
-        </div>
-    </div> --}}
+
 
 
 
@@ -122,41 +100,12 @@
         });
 
 
-    
-
-
-
-        const dislikeButtons = document.querySelectorAll('.dislike-button');
-
-        dislikeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const articleId = button.dataset.articleId;
-                const isDisliked = button.classList.contains('disliked');
-
-                fetch(`/articles/${articleId}/dislike`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({
-                            disliked: !isDisliked
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {})
-                    .catch(error => {
-                        console.error('Erreur lors de la mise à jour des dislikes :', error);
-                    });
-            });
-        });
-
         const searchForm = document.getElementById('search-form');
         const searchResults = document.getElementById('search-results');
         searchForm.addEventListener('input', function(event) {
             const query = event.target.value;
-
-            fetch(`/articles/search?query=${query}`)
+            
+            fetch(`/search?query=${query}`)
                 .then(response => response.json())
                 .then(data => {
 
@@ -258,5 +207,25 @@
         function closeCommentForm() {
             document.getElementById('addCommentModal').classList.add('hidden');
         }
+        function deleteArticle(articleId) {
+        if (confirm("Are you sure you want to delete this article?")) {
+            fetch(`/articles/${articleId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Article deleted successfully') {
+                        // Mettez en œuvre la logique pour supprimer l'article du DOM ou actualiser la page
+                        window.location.reload(); // Actualisez la page après la suppression
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting article:', error);
+                });
+        }
+    }
     </script>
 </x-app>

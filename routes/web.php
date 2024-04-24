@@ -54,7 +54,8 @@ Route::get('/admin/dashboard',[AdminController::class,'index'])->name('dashboard
 
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+// Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
 
 
 });
@@ -113,10 +114,8 @@ Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('ar
 Route::post('/articles/{id}/like', [ArticleController::class, 'like']);
 Route::post('/articles/{id}/dislike', [ArticleController::class, 'dislike']);
 
-Route::get('/articles/search', [ArticleController::class, 'search'])->name('articles.search');
-
 
 
 Route::post('/articles/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
-
+Route::get('/search', [ArticleController::class, 'search'])->name('articles.search');
 require __DIR__.'/auth.php';

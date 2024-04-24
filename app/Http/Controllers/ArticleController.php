@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Contracts\View\View;
 
 class ArticleController extends Controller
 {
@@ -42,27 +43,16 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article)
     {
-        // Valider les données du formulaire
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
     
-        // Mettre à jour les données de l'article
         $article->update($validatedData);
     
-        // Rediriger l'utilisateur vers la page des articles avec un message de succès
         return redirect()->route('articles.index')->with('success', 'Article mis à jour avec succès.');
     }
     
-    
-
-    public function destroy($id)
-    {
-        $article = Article::findOrFail($id);
-        $article->delete();
-        return response()->json(['message' => 'Article supprimé avec succès.']);
-    }
 
 
     public function like(Request $request, $id)
@@ -71,11 +61,9 @@ class ArticleController extends Controller
         $isLiked = $article->likes()->where('user_id', auth()->id())->exists();
     
         if ($isLiked) {
-            // Si déjà liké, détacher le like
             $article->likes()->detach(auth()->id());
             $article->decrement('likes');
         } else {
-            // Sinon, attacher le like
             $article->likes()->syncWithoutDetaching(auth()->id());
             $article->increment('likes');
         }
@@ -103,13 +91,13 @@ class ArticleController extends Controller
 
     public function search(Request $request)
     {
+        $hi = "hi";
         $query = $request->input('query');
     
         $articles = Article::where('title', 'like', "%$query%")
                             ->orWhere('content', 'like', "%$query%")
                             ->get();
     
-        // Ajouter le chemin d'accès complet des images aux articles
         $articles->transform(function ($article) {
             $article->image = asset($article->image);
             $article->isAdmin = (auth()->user() && auth()->user()->role == 'admin');
@@ -127,6 +115,11 @@ class ArticleController extends Controller
          
         return view('articles.show', compact('article', 'comments'));
     }
-
+    public function destroy($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->delete();
+        return response()->json(['message' => 'Article deleted successfully']);
+    }
 
 }
