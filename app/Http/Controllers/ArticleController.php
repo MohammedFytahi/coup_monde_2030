@@ -122,4 +122,14 @@ class ArticleController extends Controller
         return response()->json(['message' => 'Article deleted successfully']);
     }
 
+
+    public function statistique(){
+        $totalArticles = Article::count();
+        $articles = Article::withCount('likes')->get();
+    
+        return view('admin.dashboard', compact('totalArticles', 'articles'));
+    }
+    
+
+
 }

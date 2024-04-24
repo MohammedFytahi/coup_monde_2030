@@ -1,4 +1,57 @@
 <x-app title="teams">
+    <style>
+.club {
+    width: 190px;
+    height: 254px;
+    background: #dfe8f3;
+    position: relative;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.club::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+    height: 130%;
+    animation: rotBGimg 3s linear infinite;
+    transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.club::after {
+    content: '';
+    position: absolute;
+    background: #b6b9bd;
+    inset: 5px;
+    border-radius: 15px;
+}
+
+.club img {
+    position: relative;     
+    z-index: 2; 
+    max-width: 100%; 
+    max-height: 100%; 
+}
+.club h4{
+    z-index: 1;
+}
+
+
+ 
+    </style>
     <div class="container">
         <h2 class="text-2xl uppercase font-bold mb-5">Liste des équipes</h2>
         <a id="addMatchBtn" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="{{route('teams.create')}}"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Add New Card</a>
@@ -19,249 +72,5 @@
 
     
 </x-app>
-<style>
-    
-.players{
-    margin-top: 70px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 27px;
-    margin-bottom: 165px;
-}
-.player{
-    display: flex;
-    flex-direction: column;
-    height: 100%; 
-    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
-    align-items: flex-start;
-}
-.player:hover{
-    color: white;
-    background-color: #000000;
-}
-.player img{
-    width: 300px;
-    height: 256px;
-    margin: 15px 15px 0px 15px;
-}
-.player-info{
-    margin: 16px 15px;
-}
-.player-info h3{
-    margin: 10px 0px;
-}
-.player-info p{
-    width: 300px;
-    margin: 25px 0px;
-    text-align: justify;
-}
-.player-info .link-button{
-    background-color: #990011FF;
-}
-.player-info .link-button:hover{
-    background-color: rgb(197, 5, 28);
-}
 
-/*-----------------------
-Players Section Style Ends
-------------------------------*/
-
-/*-----------------------
-Football Updates Starts
-------------------------------*/
-
-.football-updates{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 100px;
-}
-.updates-text{
-    width: 469px;
-    margin-right: 66px;
-}
-.updates-text h2{
-    color: #0A0826;
-    width: 469px;
-    margin: 8px 0px;
-}
-.updates-text p{
-    margin-top: 8px;
-    margin-bottom: 24px;
-}
-.updates-text a{
-    background: #E02C6D;
-    width: 173px;
-    padding: 10px 24px;
-    text-decoration: none;
-    color: white;
-}
-.updates-text a:hover{
-    background: #ff005d;
-}
-.updates-image img{
-    width: 567px;
-    height: 427px;
-}
-
-/*-----------------------
-Football Updates Ends
-------------------------------*/
-
-/*----------------------
-Popular Highlights Style Starts
----------------------- */
-.highlights{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-column-gap: 25px;
-    margin-bottom: 100px;
-}
-.match{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-.match h4{
-    width: 347.4px;
-    margin-bottom: 5px;
-}
-/*----------------------
-Popular Highlights Style Ends
----------------------- */
-
-/*----------------------
-Club Style Starts
----------------------- */
-.clubs{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 20px;
-    margin-bottom: 60px;
-}
-.club{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 240px;
-    height: 150px;
-    box-shadow: 10px 10px 40px gray;
-    border-radius: 12px;
-    /* transition: width 0.2s ease-in-out; */
-}
-.club:hover{
-    /* width: 260px;
-    height: 180px; */
-    background-color: #E02C6D;
-}
-.club:hover .club-logo{
-    width: 100px;
-    height: 100px;
-}
-.club h4{
-    margin: 0px;
-    color: white;
-    background-color: #2D25A0; 
-    width: 100%;
-    text-align: center;
-}
-.club-logo{
-    width: 80px;
-    height: 80px;
-}
-
-/*----------------------
-Club Style Ends
----------------------- */
-
-
-/* Fixture Style Starts */
-.flexible{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.fixture-header{
-    background-color: #2D25A0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 1050px;
-    color: white;
-}
-.fixture-header .link-button{
-    height: 100%;
-}
-.fixture-name{
-    width: 787.5px;
-    color: white;
-    text-align: center;
-}
-.fixture-name h3{
-    background-color: #2D25A0;
-    margin: 0px;
-}
-.fixtures{
-    display: grid;
-    grid-template-columns: 1fr;
-    box-shadow: 10px 10px 40px gray;
-}
-.fixture{
-    display: flex;
-    align-items: center;
-}
-.fixture h4{
-    text-align: center;
-}
-.status{
-    margin-left: 20px;
-    width: 46px;
-    background-color: rgb(91, 163, 91);
-    padding: 8px;
-}
-.fixture p{
-    color: black;
-    margin-left: 220px;
-}
-hr{
-    width: 100%;
-}
-#orange-color{
-    background-color: orange;
-}
- /* Fixture Style Ends */
-
-
-/*----------------------
-Footer Style Starts
----------------------- */
-footer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-footer img{
-    width: 483.87px;
-}
-footer a{
-    color: black;
-}
-.fab{
-    font-size: 32px;
-    margin-right: 10px;
-}
-footer p{
-    color: #000000;
-    font-size: 18px;
-    font-weight: normal;
-    font-style: normal;
-}
-
-</style>
 

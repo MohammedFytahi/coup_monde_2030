@@ -15,4 +15,5 @@ class AdminController extends Controller
         // Passer les résultats des matchs à la vue
         return view('admin.dashboard', ['matchResults' => $matchResults]);
     }
+    
 }

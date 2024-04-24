@@ -44,15 +44,15 @@
         .match-card .match-actions button:hover {
             background-color: #4b5563;
         }
+
         .played {
-        /* Styles pour le statut "Played" */
-        background-color: #4caf50; /* Fond vert */
-        color: white; /* Texte blanc */
-        font-weight: bold; /* Texte en gras */
-        padding: 0.5rem 1rem; /* Espacement interne */
-        border-radius: 0.25rem; /* Coins arrondis */
-        display: inline-block; /* Affichage en ligne */
-    }
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            display: inline-block;
+        }
     </style>
 
 
@@ -82,7 +82,6 @@
                     href="javascript:;"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Add New Card</a>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @foreach ($matches as $match)
-                    
                         <div class=" match-card   glass shadow-xl overflow-hidden shadow-md">
                             <div class="flex justify-between p-4">
                                 <img src="{{ asset($match->team1->flag) }}" alt="{{ $match->team1->name }}">
@@ -98,39 +97,46 @@
                                     <p class="text-gray-700 mb-2">Result: {{ $match->result }}</p>
                                 @endif
                             </div>
-                             <div class="match-actions">
+                            <div class="match-actions">
                                 @if (auth()->user() && auth()->user()->role == 'admin')
-                                
                                     <div class="m-5">
-                                        <a href="{{ route('matches.edit', $match->id) }}" class="flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        <a href="{{ route('matches.edit', $match->id) }}"
+                                            class="flex p-2.5 bg-yellow-500 rounded-xl hover:rounded-3xl hover:bg-yellow-600 transition-all duration-300 text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                         </a>
                                     </div>
-                            
-                                  
-                                        
+
+
+
 
                                     <form action="{{ route('matches.destroy', $match->id) }}" method="POST"
                                         class="inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="inline-block px-4 py-3 mb-0 font-bold text-center text-red-600 uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in hover:scale-102 active:opacity-85"> <i class="mr-2 far fa-trash-alt" aria-hidden="true"></i>Delete</button>
+                                            class="inline-block px-4 py-3 mb-0 font-bold text-center text-red-600 uppercase align-middle transition-all border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in hover:scale-102 active:opacity-85">
+                                            <i class="mr-2 far fa-trash-alt" aria-hidden="true"></i>Delete</button>
                                     </form>
                                 @endif
 
                                 @if ($match->date <= now() && auth()->user() && auth()->user()->role == 'admin')
-                                @if ($match->matchResults()->exists())
-                                <a href="{{ route('match_results.show', $match->id) }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">
-                                    <i class="far fa-eye mr-2"></i> <!-- Ajoutez cette ligne pour l'icône d'œil -->
-                                  
-                                </a>
+                                    @if ($match->matchResults()->exists())
+                                        <a href="{{ route('match_results.show', $match->id) }}"
+                                            class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">
+                                            <i class="far fa-eye mr-2"></i>
+                                            <!-- Ajoutez cette ligne pour l'icône d'œil -->
+
+                                        </a>
                                     @else
                                         <a href="{{ route('match_results.create', $match->id) }}"
                                             class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">
-                                            Add Result
+                                            <i class="fas fa-plus-circle mr-2"></i>
+                                            <!-- Ajoutez cette ligne pour l'icône de plus -->
+
                                         </a>
                                     @endif
                                 @endif
@@ -138,7 +144,7 @@
 
 
 
-                                @if (auth()->user() && auth()->user()->role == 'utilisateur')
+                                @if (auth()->user() && auth()->user()->role == 'utilisateur' && now() < $match->date)
                                     <button
                                         class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out mb-2 inline-flex items-center"
                                         onclick="toggleReservationForm({{ $match->id }})">
@@ -154,30 +160,37 @@
                                 @endif
 
 
-                                <div id="reservationForm{{ $match->id }}" class="hidden fixed inset-0 flex items-center justify-center z-50 overflow-auto bg-gray-500 bg-opacity-75">
+                                <div id="reservationForm{{ $match->id }}"
+                                    class="hidden fixed inset-0 flex items-center justify-center z-50 overflow-auto bg-gray-500 bg-opacity-75">
                                     <div class="bg-white rounded-lg p-8 max-w-md mx-auto">
                                         <h2 class="text-2xl font-bold mb-4">Réserver un ticket</h2>
-                                        <form action="{{ route('reserve-ticket', ['match_id' => $match->id]) }}" method="POST">
+                                        <form action="{{ route('reserve-ticket', ['match_id' => $match->id]) }}"
+                                            method="POST">
                                             @csrf
                                             <div class="mb-4">
                                                 <label for="quantity" class="block text-gray-700">Quantité:</label>
-                                                <input type="number" id="quantity" name="quantity" min="1" required placeholder="Quantité" class="w-full px-4 py-2 mt-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500">
+                                                <input type="number" id="quantity" name="quantity" min="1"
+                                                    required placeholder="Quantité"
+                                                    class="w-full px-4 py-2 mt-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500">
                                             </div>
                                             <div class="flex justify-end">
-                                                <button type="button" onclick="toggleReservationForm({{ $match->id }})" class="mr-2 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Annuler</button>
-                                                <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Réserver</button>
+                                                <button type="button"
+                                                    onclick="toggleReservationForm({{ $match->id }})"
+                                                    class="mr-2 px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Annuler</button>
+                                                <button type="submit"
+                                                    class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Réserver</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                
+
 
                             </div>
 
                         </div>
                     @endforeach
                 </div>
-            </div>  
+            </div>
 
 
             <!-- Modale pour ajouter un match -->
@@ -205,7 +218,9 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <!-- Votre code HTML -->
                             <div class="mb-4">
+                                <label for="team2_id" class="block text-gray-700">Team 2:</label>
                                 <select name="team2_id" id="team2_id" required
                                     class="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500">
                                     <option value="" disabled selected>Select Team 2</option>
@@ -214,6 +229,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="mb-4">
                                 <select name="stadium_id" id="stadium_id" required
                                     class="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 focus:border-blue-500">
@@ -263,7 +279,8 @@
                                     <option value="" disabled>Select Team 1</option>
                                     @foreach ($teams as $team)
                                         <option value="{{ $team->id }}"
-                                            @if ($match->team1_id == $team->id) selected @endif>{{ $team->name }}</option>
+                                            @if ($match->team1_id == $team->id) selected @endif>{{ $team->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -274,7 +291,8 @@
                                     <option value="" disabled>Select Team 2</option>
                                     @foreach ($teams as $team)
                                         <option value="{{ $team->id }}"
-                                            @if ($match->team2_id == $team->id) selected @endif>{{ $team->name }}</option>
+                                            @if ($match->team2_id == $team->id) selected @endif>{{ $team->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -285,7 +303,8 @@
                                     <option value="" disabled>Select Stadium</option>
                                     @foreach ($stadiums as $stadium)
                                         <option value="{{ $stadium->id }}"
-                                            @if ($match->stadium_id == $stadium->id) selected @endif>{{ $stadium->name }}</option>
+                                            @if ($match->stadium_id == $stadium->id) selected @endif>{{ $stadium->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -321,45 +340,41 @@
             });
 
             function updateMatchTimer(matchDate, matchId) {
-    // Récupérer l'élément de compteur de temps par son ID
-    var timerElement = document.getElementById('matchTimer' + matchId);
+                // Récupérer l'élément de compteur de temps par son ID
+                var timerElement = document.getElementById('matchTimer' + matchId);
 
-    // Calculer le temps restant jusqu'au début du match
-    var currentDate = new Date();
-    var startDate = new Date(matchDate);
-    var timeDiff = startDate.getTime() - currentDate.getTime();
+                // Calculer le temps restant jusqu'au début du match
+                var currentDate = new Date();
+                var startDate = new Date(matchDate);
+                var timeDiff = startDate.getTime() - currentDate.getTime();
 
-    // Si le temps restant est inférieur ou égal à zéro, le match est terminé
-    if (timeDiff <= 0) {
-        timerElement.innerHTML = "Played";
-        timerElement.classList.add('played');
-        return;
-    }
+                if (timeDiff <= 0) {
+                    timerElement.innerHTML = "Played";
+                    timerElement.classList.add('played');
+                    return;
+                }
 
-    var seconds = Math.floor(timeDiff / 1000);
+                var seconds = Math.floor(timeDiff / 1000);
 
-    // Calculer les heures, minutes et secondes restantes
-    var hours = Math.floor(seconds / 3600);
-    var minutes = Math.floor((seconds % 3600) / 60);
-    seconds = seconds % 60;
 
-    // Mettre à jour le texte du compteur de temps
-    timerElement.innerHTML = `
+                var hours = Math.floor(seconds / 3600);
+                var minutes = Math.floor((seconds % 3600) / 60);
+                seconds = seconds % 60;
+
+
+                timerElement.innerHTML = `
         <span class="countdown font-mono text-2xl">
             <span style="--value:${hours};">${hours}</span>h
             <span style="--value:${minutes};">${minutes}</span>m
             <span style="--value:${seconds};">${seconds}</span>s
         </span>`;
-}
+            }
 
 
 
-            // Mettre à jour le compteur de temps pour chaque match
             @foreach ($matches as $match)
                 updateMatchTimer('{{ $match->date }}', '{{ $match->id }}');
             @endforeach
-
-            // Mettre à jour le compteur de temps toutes les secondes
             setInterval(function() {
                 @foreach ($matches as $match)
                     updateMatchTimer('{{ $match->date }}', '{{ $match->id }}');
@@ -375,4 +390,19 @@
                 var form = document.getElementById('scoreForm' + matchId);
                 form.classList.toggle('hidden');
             }
+
+            // JavaScript pour écouter les changements dans le premier select et mettre à jour le deuxième select
+document.getElementById('team1_id').addEventListener('change', function() {
+    var team1Id = this.value; // Récupérer la valeur sélectionnée dans le premier select
+
+    // Parcourir les options du deuxième select et les désactiver si elles correspondent à la valeur sélectionnée dans le premier select
+    document.querySelectorAll('#team2_id option').forEach(function(option) {
+        if (option.value === team1Id) {
+            option.disabled = true; // Désactiver l'option si elle correspond à la valeur sélectionnée dans le premier select
+        } else {
+            option.disabled = false; // Activer l'option sinon
+        }
+    });
+});
+
         </script>

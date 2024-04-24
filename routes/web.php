@@ -49,7 +49,10 @@ Route::get('/matches/{matchId}/add-scores', [MatchController::class, 'create_res
 Route::post('/matches/{matchId}/add-scores', [MatchController::class, 'store_result'])->name('match_results.store');
 
 
-Route::get('/admin/dashboard',[AdminController::class,'index'])->name('dashboard');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard');
+Route::get('/admin/statistiques', [ArticleController::class, 'statistique'])->name('admin.statistiques');
+
+
 
 
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
