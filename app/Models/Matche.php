@@ -12,7 +12,7 @@ class Matche extends Model
      use HasFactory;
      use SoftDeletes;
 
-    protected $fillable = ['date', 'team1_id', 'team2_id', 'stadium_id', 'price'];
+    protected $fillable = ['date', 'team1_id', 'team2_id', 'stadium_id', 'price', 'available_seats '];
 
     public function team1()
     {

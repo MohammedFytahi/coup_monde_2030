@@ -15,6 +15,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" 
       rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-***********" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?php echo asset('css/app.css')?>" type="text/css">
 
     <link rel="stylesheet" href="<?php echo asset('css/app.css')?>" type="text/css">
     <title>social | {{$title}}</title>

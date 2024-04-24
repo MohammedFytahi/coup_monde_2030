@@ -28,7 +28,25 @@ class MatchController extends Controller
 
     public function store(Request $request)
     {
-        Matche::create($request->all());
+
+        $validatedData = $request->validate([
+            'stadium_id' => 'required|exists:stadiums,id', 
+            
+        ]);
+
+        $match = new Matche();
+        $match->team1_id = $request->input('team1_id');
+        $match->team2_id = $request->input('team2_id');
+        $match->date = $request->input('date');
+        $match->price = $request->input('price');
+        $match->stadium_id = $validatedData['stadium_id']; 
+
+
+        $stadium = Stadium::findOrFail($validatedData['stadium_id']);
+        $match->available_seats = $stadium->capacity;
+
+        $match->save();
+
         return redirect()->route('matches.index')->with('success', 'Match created successfully.');
     }
 

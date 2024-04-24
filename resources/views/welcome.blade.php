@@ -1,38 +1,25 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Football Website</title>
-    <!-- Include Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-***********" crossorigin="anonymous">
-        <link rel="stylesheet" href="<?php echo asset('css/app.css')?>" type="text/css">
-</head>
-
+<x-app title="Home">
 
 <body class="bg-gray-100 text-gray-800">
 
-    <!-- Navigation Bar -->
-    <x-navbar />
 
-    <!-- Hero Section -->
-    <section class="bg-cover bg-center bg-gradient-to-b from-blue-600 to-blue-400 text-white py-24" style="background-image: url('images/hero-image.png');">
+   
+   
+
+    <section class="bg-cover bg-center bg-gradient-to-b from-blue-600 to-blue-400 text-white py-24 w-full" style="background-image: url('images/hero-image.png'); background-attachment: fixed;">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4">Fifa world Cup Morocco 2030</h1>
             <p class="text-lg md:text-xl mb-8">Get the latest updates on matches, teams, and players.</p>
-            <a href="#" class="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full">Explore
-                Now</a>
+            <a href="#" class="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full">Explore Now</a>
         </div>
     </section>
+    
+    
 
     <section id="clubs">
-        <div class="clubs-header">
-            <h2>Clubs</h2>
-            <p>Check out every club details and you may also participate in club giveaways</p>
+        <div class="fixture-name m-10 mx-auto">
+        <h3 class="text-lg font-semibold mb-4">FIFA World Cup</h3>
         </div>
         <div class="clubs">
             <div class="club">
@@ -207,53 +194,7 @@
             </div>
         </article>
     </section>
-    <section class="flexible">
-        <div class="fixture-header">
-            <h3>Todays Matches</h3>
-            <a class="link-button" target="_blank" href="https://www.goal.com/en-in/live-scores">Live</a>
-        </div>
-        <p>Live Football Scores, Fixtures & Results</p>
-        <div class="fixture-name">
-            <h3>UEFA CHAMPIONS LEAGUE</h3>
-            <div class="fixtures">
-                <div class="fixture">
-                    <h4 id="orange-color" class="status">29'</h4>
-                    <p>Kairat 1 - 0 Maccabi Haifa</p>
-                </div>
-                <hr>
-                <div class="fixture">
-                    <h4 class="status">21:00</h4>
-                    <p>Kairat 1 - 0 Maccabi Haifa</p>
-                </div>
-                <hr>
-                <div class="fixture">
-                    <h4 class="status">23:00</h4>
-                    <p>Kairat 1 - 0 Maccabi Haifa</p>
-                </div>
-                <hr>
-                <div class="fixture">
-                    <h4 class="status">00:00</h4>
-                    <p>Kairat 1 - 0 Maccabi Haifa</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 Football Website. All rights reserved.</p>
-            <div class="flex justify-center mt-4">
-                <a href="#" class="text-xl mr-4"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-xl mr-4"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-xl mr-4"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-xl mr-4"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-        
-    </footer>
 
-    
 
 </body>
-
-</html>
+</x-app>
