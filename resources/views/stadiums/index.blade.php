@@ -1,32 +1,51 @@
 <x-app title="Stadiums">
     <div class="container mx-auto px-4 py-8">
         <h2 class="text-3xl font-bold mb-4">Stadiums</h2>
-        <button onclick="openModal('add')" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 ease-in-out mb-4">Add Stadium</button>
+        <button onclick="openModal('add')"
+            class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+            role="button">Add Stadium</button>
+
         <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
             <thead>
                 <tr>
-                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Name</th>
-                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Capacity</th>
-                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Address</th>
-                    <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
+                    <th
+                        class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                        Name</th>
+                    <th
+                        class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                        Capacity</th>
+                    <th
+                        class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                        Address</th>
+                    <th
+                        class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                        Actions</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- Dans votre vue -->
                 @foreach ($stadiums as $stadium)
                     <tr class="hover:bg-gray-100 transition duration-300 ease-in-out">
-                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">{{ $stadium->name }}</td>
-                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">{{ $stadium->capacity }}</td>
-                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">{{ $stadium->address }}</td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <button onclick="openModal('edit', '{{ $stadium->id }}', '{{ $stadium->name }}', '{{ $stadium->capacity }}', '{{ $stadium->address }}')" class="text-blue-500 hover:text-blue-700">
+                            {{ $stadium->name }}</td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            {{ $stadium->capacity }}</td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            {{ $stadium->address }}</td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <button
+                                onclick="openModal('edit', '{{ $stadium->id }}', '{{ $stadium->name }}', '{{ $stadium->capacity }}', '{{ $stadium->address }}')"
+                                class="text-blue-500 hover:text-blue-700">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button onclick="deleteStadium('{{ $stadium->id }}')" class="text-red-500 hover:text-red-700 ml-2">
+                            <button onclick="deleteStadium('{{ $stadium->id }}')"
+                                class="text-red-500 hover:text-red-700 ml-2">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
     </div>
@@ -81,7 +100,7 @@
 
         if (mode === 'add') {
             modalTitle.textContent = 'Add Stadium';
-            editForm.action = '{{ route("stadiums.store") }}';
+            editForm.action = '{{ route('stadiums.store') }}';
             document.getElementById('stadiumId').value = '';
             document.getElementById('name').value = '';
             document.getElementById('capacity').value = '';
@@ -103,7 +122,27 @@
         modal.classList.add('hidden');
     }
 
-    function deleteStadium(id) {
-        // Code to delete stadium with given ID
+// Dans votre script JavaScript
+function deleteStadium(id) {
+    if (confirm("Are you sure you want to delete this stadium?")) {
+        fetch('/stadiums/' + id, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload(); // Actualise la page après la suppression
+            } else {
+                console.error('Error deleting stadium');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting stadium:', error);
+        });
     }
+}
+
 </script>

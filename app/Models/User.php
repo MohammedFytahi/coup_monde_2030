@@ -53,4 +53,8 @@ public function articleLikes()
 {
     return $this->hasMany(ArticleLike::class);
 }
+public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
 }

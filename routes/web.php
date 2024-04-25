@@ -58,7 +58,7 @@ Route::get('/admin/statistiques', [ArticleController::class, 'statistique'])->na
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
-// Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
 
 
 });
@@ -78,11 +78,15 @@ Route::get('/matches', [MatchController::class, 'index'])->name('matches.index')
 Route::post('/articles/{articleId}/comments', [CommentController::class, 'addComment'])->name('articles.comments.add');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
+Route::get('/search', [TeamController::class, 'search'])->name('teams.search');
+
 
 
 
 
 Route::get('/stadiums', [StadiumController::class, 'index'])->name('stadiums.index');
+Route::delete('/stadiums/{id}', [StadiumController::class, 'destroy'])->name('stadiums.destroy');
+
 
 
 
@@ -109,8 +113,8 @@ Route::get('/matches/results', [MatchController::class, 'showResults'])->name('m
 Route::get('/artiles/index',[ArticleController::class,'index'])->name('articles.index');
 
 
-Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
-Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+// Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
+// Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
 
 

@@ -60,5 +60,13 @@ public function update(Request $request, $id)
     return redirect()->route('stadiums.index')->with('success', 'Stadium updated successfully.');
 }
 
+public function destroy($id)
+{
+    $stadium = Stadium::findOrFail($id);
+    $stadium->delete();
+    
+    return response()->json(['message' => 'Stadium deleted successfully']);
+}   
+
 }
 

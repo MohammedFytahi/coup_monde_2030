@@ -57,6 +57,16 @@ class TeamController extends Controller
         return redirect()->route('teams.index')
                          ->with('success', 'Équipe créée avec succès.');
     }
+
+    
+    public function search(Request $request)
+{
+    $searchTerm = $request->input('searchTerm');
+
+    $teams = Team::where('name', 'LIKE', "%{$searchTerm}%")->get();
+
+    return response()->json($teams);
+}
     
     
 }

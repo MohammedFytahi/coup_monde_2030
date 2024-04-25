@@ -24,6 +24,7 @@
                 <li class="mx-2"><a href="{{route('home')}}" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
                 <li class="mx-2"><a href="{{ route('matches.index') }}" class="text-yellow-400 hover:text-yellow-400">Matches</a></li>
                 <li class="mx-2"><a href="{{ route('teams.index') }}" class="text-yellow-400 hover:text-yellow-400">Teams</a></li>
+                <li class="mx-2"><a href="{{route('stadiums.index')}}" class="text-yellow-400 hover:text-yellow-400">Stadiums</a></li>
                 <li class="mx-2"><a href="{{ route('matches.results') }}" class="text-yellow-400 hover:text-yellow-400">Match results</a></li>
                 <li class="mx-2"><a href="{{route('articles.index')}}" class="text-yellow-400 hover:text-yellow-400">Articles</a></li>
                 <li class="mx-2"><a href="#" class="text-yellow-400 hover:text-yellow-400">Contact</a></li>

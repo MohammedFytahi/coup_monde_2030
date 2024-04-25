@@ -1,205 +1,173 @@
-  <x-app :title="'matche result'">
-      <div class="w-full px-6 py-6 mx-auto">
-          <!-- table 1 -->
-
-          <div class="flex flex-wrap -mx-3">
-            <div class="flex-none w-full max-w-full px-3">
-              <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-                <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                  <h6>Authors table</h6>
-                </div>
-                <div class="flex-auto px-0 pt-0 pb-2">
-                  <div class="p-0 overflow-x-auto">
-                    <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
-                      <thead class="align-bottom">
-                        <tr>
-                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Match ID</th>
-                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Team 1 Score</th>
-                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Team 2 Score</th>
-                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Result</th>
-                          <th class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Employed</th>
-                          <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <div class="flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-2.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" alt="user1" />
-                              </div>
-                              <div class="flex flex-col justify-center">
-                                <h6 class="mb-0 text-sm leading-normal">John Michael</h6>
-                                <p class="mb-0 text-xs leading-tight text-slate-400">john@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 text-xs font-semibold leading-tight">Manager</p>
-                            <p class="mb-0 text-xs leading-tight text-slate-400">Organization</p>
-                          </td>
-                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="bg-gradient-to-tl from-green-600 to-lime-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Online</span>
-                          </td>
-                          <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="text-xs font-semibold leading-tight text-slate-400">23/04/18</span>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <a href="javascript:;" class="text-xs font-semibold leading-tight text-slate-400"> Edit </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <div class="flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-3.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" alt="user2" />
-                              </div>
-                              <div class="flex flex-col justify-center">
-                                <h6 class="mb-0 text-sm leading-normal">Alexa Liras</h6>
-                                <p class="mb-0 text-xs leading-tight text-slate-400">alexa@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 text-xs font-semibold leading-tight">Programator</p>
-                            <p class="mb-0 text-xs leading-tight text-slate-400">Developer</p>
-                          </td>
-                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="bg-gradient-to-tl from-slate-600 to-slate-300 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Offline</span>
-                          </td>
-                          <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="text-xs font-semibold leading-tight text-slate-400">11/01/19</span>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <a href="javascript:;" class="text-xs font-semibold leading-tight text-slate-400"> Edit </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <div class="flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-4.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" alt="user3" />
-                              </div>
-                              <div class="flex flex-col justify-center">
-                                <h6 class="mb-0 text-sm leading-normal">Laurent Perrier</h6>
-                                <p class="mb-0 text-xs leading-tight text-slate-400">laurent@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 text-xs font-semibold leading-tight">Executive</p>
-                            <p class="mb-0 text-xs leading-tight text-slate-400">Projects</p>
-                          </td>
-                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="bg-gradient-to-tl from-green-600 to-lime-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Online</span>
-                          </td>
-                          <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="text-xs font-semibold leading-tight text-slate-400">19/09/17</span>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <a href="javascript:;" class="text-xs font-semibold leading-tight text-slate-400"> Edit </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <div class="flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-3.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" alt="user4" />
-                              </div>
-                              <div class="flex flex-col justify-center">
-                                <h6 class="mb-0 text-sm leading-normal">Michael Levi</h6>
-                                <p class="mb-0 text-xs leading-tight text-slate-400">michael@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 text-xs font-semibold leading-tight">Programator</p>
-                            <p class="mb-0 text-xs leading-tight text-slate-400">Developer</p>
-                          </td>
-                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="bg-gradient-to-tl from-green-600 to-lime-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Online</span>
-                          </td>
-                          <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="text-xs font-semibold leading-tight text-slate-400">24/12/08</span>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <a href="javascript:;" class="text-xs font-semibold leading-tight text-slate-400"> Edit </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <div class="flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-2.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" alt="user5" />
-                              </div>
-                              <div class="flex flex-col justify-center">
-                                <h6 class="mb-0 text-sm leading-normal">Richard Gran</h6>
-                                <p class="mb-0 text-xs leading-tight text-slate-400">richard@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 text-xs font-semibold leading-tight">Manager</p>
-                            <p class="mb-0 text-xs leading-tight text-slate-400">Executive</p>
-                          </td>
-                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="bg-gradient-to-tl from-slate-600 to-slate-300 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Offline</span>
-                          </td>
-                          <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span class="text-xs font-semibold leading-tight text-slate-400">04/10/21</span>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <a href="javascript:;" class="text-xs font-semibold leading-tight text-slate-400"> Edit </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                            <div class="flex px-2 py-1">
-                              <div>
-                                <img src="../assets/img/team-4.jpg" class="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" alt="user6" />
-                              </div>
-                              <div class="flex flex-col justify-center">
-                                <h6 class="mb-0 text-sm leading-normal">Miriam Eric</h6>
-                                <p class="mb-0 text-xs leading-tight text-slate-400">miriam@creative-tim.com</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 text-xs font-semibold leading-tight">Programtor</p>
-                            <p class="mb-0 text-xs leading-tight text-slate-400">Developer</p>
-                          </td>
-                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                            <span class="bg-gradient-to-tl from-slate-600 to-slate-300 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Offline</span>
-                          </td>
-                          <td class="p-2 text-center align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                            <span class="text-xs font-semibold leading-tight text-slate-400">14/09/20</span>
-                          </td>
-                          <td class="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                            <a href="javascript:;" class="text-xs font-semibold leading-tight text-slate-400"> Edit </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+<x-app :title="'Statistiques'">
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-8">Dashboard</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Statistique: Nombre d'articles -->
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
+                <h2 class="text-xl font-semibold mb-4">Nombre d'articles</h2>
+                <canvas id="articleChart" width="400" height="200"></canvas>
             </div>
-          </div>
-      </div>
 
+            <!-- Statistique: Nombre de matchs -->
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
+                <h2 class="text-xl font-semibold mb-4">Nombre de matchs</h2>
+                <canvas id="matchChart" width="400" height="200"></canvas>
+            </div>
 
+            <!-- Statistique: Nombre d'équipes -->
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
+                <h2 class="text-xl font-semibold mb-4">Nombre d'équipes</h2>
+                <canvas id="teamChart" width="400" height="200"></canvas>
+            </div>
 
+            <!-- Statistique: Nombre d'utilisateurs -->
+            <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
+                <h2 class="text-xl font-semibold mb-4">Nombre d'utilisateurs</h2>
+                <canvas id="userChart" width="400" height="200"></canvas>
+            </div>
+        </div>
 
-      <div>
-        <p>Nombre total d'articles : {{ $totalArticles }}</p>
-        <ul>
-            @foreach ($articles as $article)
-            <li>
-                {{ $article->title }} - Likes : {{ $article->likes_count }}
-            </li>
-            @endforeach
-        </ul>
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
+            <h2 class="text-xl font-semibold mb-4">Utilisateur avec le plus de commentaires</h2>
+            <div class="flex items-center mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+                <span class="font-semibold">{{ $userWithMostComments->name }}</span>
+            </div>
+            <div class="flex items-center mb-2">
+                <span class="font-semibold">{{ $userWithMostComments->comments_count }}</span>
+                <span class="ml-1 text-gray-500">commentaires</span>
+            </div>
+        </div>
+
+        <!-- Statistique: Article avec le plus de likes et de commentaires -->
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
+            <h2 class="text-xl font-semibold mb-4">Article avec le plus de likes et de commentaires</h2>
+            <div class="flex items-center mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                </svg>
+                <span class="font-semibold">{{ $articleWithMostLikesAndComments->title }}</span>
+            </div>
+            <div class="flex items-center mb-2">
+                <span class="font-semibold">{{ $articleWithMostLikesAndComments->likes_count }}</span>
+                <span class="ml-1 text-gray-500">likes</span>
+            </div>
+            <div class="flex items-center">
+                <span class="font-semibold">{{ $articleWithMostLikesAndComments->comments_count }}</span>
+                <span class="ml-1 text-gray-500">commentaires</span>
+            </div>
+        </div>
+        
     </div>
-      
-    
-  </x-app>
+
+    <script>
+        // Article Chart
+        var articleChartCtx = document.getElementById('articleChart').getContext('2d');
+        var articleChart = new Chart(articleChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Nombre d\'articles'],
+                datasets: [{
+                    label: 'Nombre',
+                    data: [{{ $numberOfArticles }}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        // Match Chart
+        var matchChartCtx = document.getElementById('matchChart').getContext('2d');
+        var matchChart = new Chart(matchChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Nombre de matchs'],
+                datasets: [{
+                    label: 'Nombre',
+                    data: [{{ $numberOfMatches }}],
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        // Team Chart
+        var teamChartCtx = document.getElementById('teamChart').getContext('2d');
+        var teamChart = new Chart(teamChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Nombre d\'équipes'],
+                datasets: [{
+                    label: 'Nombre',
+                    data: [{{ $numberOfTeams }}],
+                    backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        // User Chart
+        var userChartCtx = document.getElementById('userChart').getContext('2d');
+        var userChart = new Chart(userChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Nombre d\'utilisateurs'],
+                datasets: [{
+                    label: 'Nombre',
+                    data: [{{ $numberOfUsers }}],
+                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</x-app>
