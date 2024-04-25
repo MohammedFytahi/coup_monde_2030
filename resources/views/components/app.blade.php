@@ -32,7 +32,7 @@
  
 
    
-   <main>
+   <main class="mt-20">
     @include('layouts.flashbag')
     {{$slot}}
    </main>

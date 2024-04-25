@@ -7,7 +7,7 @@
    
    
 
-    <section class="bg-cover bg-center bg-gradient-to-b from-blue-600 to-blue-400 text-white py-24 w-full" style="background-image: url('images/hero-image.png'); background-attachment: fixed;">
+    <section class="bg-cover bg-center bg-gradient-to-b from-blue-600 to-blue-400 text-white py-24 w-full " style="background-image: url('images/hero-image.png'); background-attachment: fixed; ">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4">Fifa world Cup Morocco 2030</h1>
             <p class="text-lg md:text-xl mb-8">Get the latest updates on matches, teams, and players.</p>

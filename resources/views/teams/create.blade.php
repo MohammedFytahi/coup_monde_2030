@@ -22,7 +22,7 @@
                     <button type="submit" class="w-full bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-700">Envoyer</button>
                 </form>
             </div>
-        </div>
+        </div> 
 
     </x-app>
 

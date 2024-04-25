@@ -1,6 +1,8 @@
 <x-app title="Stadiums">
+    @if (auth()->user() && auth()->user()->role == 'admin')
     <div class="container mx-auto px-4 py-8">
         <h2 class="text-3xl font-bold mb-4">Stadiums</h2>
+
         <button onclick="openModal('add')"
             class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
             role="button">Add Stadium</button>
@@ -48,6 +50,7 @@
 
             </tbody>
         </table>
+        
     </div>
 
     <div id="myModal" class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center hidden">
@@ -90,6 +93,22 @@
             </div>
         </div>
     </div>
+    @endif
+    @if (auth()->user() && auth()->user()->role == 'utilisateur')
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-0">
+    @foreach ($stadiums as $stadium)
+    
+    <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto mt-24">
+        <img src="https://i.ytimg.com/vi/K80A5l8TlvQ/maxresdefault.jpg" alt="University of Southern California" class="absolute inset-0 h-full w-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+        <h3 class="z-10 mt-3 text-3xl font-bold text-white">{{ $stadium->name }}</h3>
+        <div class="z-10 gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">{{ $stadium->address }}</div>
+    </article>
+  
+
+    @endforeach
+</div>
+    @endif
 
 </x-app>
 <script>

@@ -14,6 +14,8 @@ class StadiumController extends Controller
         return view('stadiums.index', compact('stadiums'));
     }
 
+    
+
     // public function create()
     // {
     //     return view('stadiums.index');

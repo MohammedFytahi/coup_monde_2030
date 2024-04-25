@@ -30,6 +30,9 @@ Route::get('/', function () {
 Route::middleware('role:admin')->group(function () {
     Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
     Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
+    Route::delete('/teams/{team}', [TeamController::class,'destroy'])->name('teams.destroy');
+Route::put('/teams/{team}', [TeamController::class,'update'])->name('teams.update');
+
 
     Route::get('/matches/create', [MatchController::class, 'create'])->name('matches.create');
 Route::post('/matches/store', [MatchController::class, 'store'])->name('matches.store');
@@ -59,6 +62,7 @@ Route::get('/articles/create', [ArticleController::class, 'create'])->name('arti
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
+
 
 
 });

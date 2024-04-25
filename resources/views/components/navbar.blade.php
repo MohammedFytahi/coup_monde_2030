@@ -1,5 +1,13 @@
 <!-- component -->
-<nav class="bg-blue-900 shadow-md py-4 px-4 md:px-8">
+<style>
+    /* Style de survol des liens de navigation */
+    .nav-links a:hover {
+        text-decoration: none;
+        color: #FFD700; 
+          
+    }
+</style>
+<nav class="bg-blue-900 shadow-md py-4 px-4 md:px-8 w-full" style="position: fixed; z-index: 4; ">
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
         <div class="nav-logo">
@@ -27,7 +35,7 @@
                 <li class="mx-2"><a href="{{route('stadiums.index')}}" class="text-yellow-400 hover:text-yellow-400">Stadiums</a></li>
                 <li class="mx-2"><a href="{{ route('matches.results') }}" class="text-yellow-400 hover:text-yellow-400">Match results</a></li>
                 <li class="mx-2"><a href="{{route('articles.index')}}" class="text-yellow-400 hover:text-yellow-400">Articles</a></li>
-                <li class="mx-2"><a href="#" class="text-yellow-400 hover:text-yellow-400">Contact</a></li>
+              
             </ul>
             <div class="nav-auth-buttons">
                 @auth

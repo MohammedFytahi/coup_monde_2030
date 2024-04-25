@@ -4,14 +4,14 @@
     font-size: 18px;
     color: #333; /* couleur de texte souhaitée */
 }</style>
-    <section class="flexible">
-        <div class="fixture-header">
-            <h3>Todays Matches</h3>
+    <section class="flexible mt-30" style=" margin-top:10px ">
+        <div class="fixture-header" style="position:sticky;">
+            <h3>FIFA World Cu</h3>
             <a class="link-button" target="_blank" href="https://www.goal.com/en-in/live-scores">Live</a>
         </div>
       
         <div class="fixture-name">
-            <h3>UEFA CHAMPIONS LEAGUE</h3>
+            <h3>Matches Results</h3>
             <div class="fixtures">
                 @foreach($matches as $match)
                     <div class="fixture">

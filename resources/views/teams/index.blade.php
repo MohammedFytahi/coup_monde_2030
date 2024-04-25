@@ -64,13 +64,42 @@
                 <div class="entreprise-card club" data-nom="{{ $team->name }}">
                     <img class="club-logo" src="{{ asset(''. $team->flag) }}" alt="{{ $team->name }}">
                     <h4>{{ $team->name }}</h4>
+                    <div class="icon-container" style=" z-index: 2; ">
+                        <a href=""><i class="fas fa-edit"></i></a>
+                        <a href=" " onclick="event.preventDefault(); document.getElementById('delete-form-{{ $team->id }}').submit();"><i class="fas fa-trash"></i></a>
+                        <form id="delete-form-{{ $team->id }}" action="" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    </div>
                 </div>
                 @endforeach
+                
             </div>
         </section>
     </div>
 
     
+<!-- edit.blade.php -->
+
+<div id="editTeamModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Modifier l'équipe</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <label for="name">Nom de l'équipe:</label>
+            <input type="text" id="name" name="name" value="{{ $team->name }}" required>
+            <label for="country">Pays:</label>
+            <input type="text" id="country" name="country" value="{{ $team->country }}" required>
+            <label for="flag">Drapeau:</label>
+            <input type="file" id="flag" name="flag">
+            <button type="submit">Modifier</button>
+        </form>
+    </div>
+</div>
+
 
 </x-app>
 
@@ -89,4 +118,22 @@
     });
 });
 
+function openEditModal() {
+    var modal = document.getElementById('editTeamModal');
+    modal.style.display = 'block';
+}
+
+// Fonction pour fermer la modal
+function closeEditModal() {
+    var modal = document.getElementById('editTeamModal');
+    modal.style.display = 'none';
+}
+
+// Fermer la modal lorsque l'utilisateur clique en dehors de celle-ci
+window.onclick = function(event) {
+    var modal = document.getElementById('editTeamModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 </script>

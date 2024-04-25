@@ -68,5 +68,32 @@ class TeamController extends Controller
     return response()->json($teams);
 }
     
+public function destroy(Team $team)
+{
+    $team->delete();
+    return redirect()->route('teams.index')->with('success', 'Équipe supprimée avec succès.');
+}
+
+public function update(Request $request, Team $team)
+{
+    $request->validate([
+        'name' => 'required|string',
+        'country' => 'required|string',
+        'flag' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ]);
+
+    $teamData = $request->except('flag');
+
+    if ($request->hasFile('flag')) {
+        $image = $request->file('flag');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('flags'), $imageName);
+        $teamData['flag'] = 'flags/' . $imageName;
+    }
+
+    $team->update($teamData);
+
+    return redirect()->route('teams.index')->with('success', 'Équipe mise à jour avec succès.');
+}
     
 }

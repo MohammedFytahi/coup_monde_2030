@@ -1,6 +1,6 @@
 <x-app :title="'match results'">
     <section class="flexible">
-        <div class="fixture-header flex justify-between items-center mb-4">
+        <div class="fixture-header flex justify-between items-center mb-4 mt-20">
 
            
         </div>
