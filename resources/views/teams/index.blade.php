@@ -56,7 +56,9 @@
         
     <div class="container" id="searchResults">
         <h2 class="text-2xl uppercase font-bold mb-5">Liste des équipes</h2>
+        @if (auth()->user() && auth()->user()->role == 'admin')
         <a id="addMatchBtn" onclick="openModal()" class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25" href="{{ route('teams.create') }}"> <i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Card</a>
+       @endif
         <section id="clubs">
             {{-- <div id="searchResults"></div> --}}
             <div class="clubs">
@@ -64,6 +66,7 @@
                 <div class="entreprise-card club" data-nom="{{ $team->name }}">
                     <img class="club-logo" src="{{ asset(''. $team->flag) }}" alt="{{ $team->name }}">
                     <h4>{{ $team->name }}</h4>
+                    @if (auth()->user() && auth()->user()->role == 'admin')
                     <div class="icon-container" style=" z-index: 2; ">
                         <a href=""><i class="fas fa-edit"></i></a>
                         <a href=" " onclick="event.preventDefault(); document.getElementById('delete-form-{{ $team->id }}').submit();"><i class="fas fa-trash"></i></a>
@@ -72,6 +75,7 @@
                             @method('DELETE')
                         </form>
                     </div>
+                    @endif
                 </div>
                 @endforeach
                 
@@ -80,9 +84,9 @@
     </div>
 
     
-<!-- edit.blade.php -->
 
-<div id="editTeamModal" class="modal">
+
+{{-- <div id="editTeamModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Modifier l'équipe</h2>
@@ -98,7 +102,7 @@
             <button type="submit">Modifier</button>
         </form>
     </div>
-</div>
+</div> --}}
 
 
 </x-app>

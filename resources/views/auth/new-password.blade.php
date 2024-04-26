@@ -33,7 +33,7 @@
             <form method="POST" action="{{ route('password.store') }}">
                 @csrf
                 <input type="text" hidden name="token" value="{{ $token }}">
-                <!-- Email Address -->
+
                 <div class="input__wrapper">
                     <input id="email" type="email" name="email" placeholder="Your email"
                         title="Minimum 6 characters at least 1 Alphabet and 1 Number" class="input__field w-full">

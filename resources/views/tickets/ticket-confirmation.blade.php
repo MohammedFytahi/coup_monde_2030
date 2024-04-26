@@ -19,6 +19,34 @@
         .white-text {
             color: white;
         }
+
+        /* Masquer le contenu non nécessaire lors de l'impression */
+        @media print {
+           
+
+            .ticket-background, .ticket-content, .print-button {
+                visibility: visible;
+            }
+
+            .ticket-background {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .ticket-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .print-button {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -28,37 +56,36 @@
 
         @foreach ($tickets as $ticket)
         <div class="ticket-background bg-gradient-to-r from-blue-400 to-indigo-600 rounded-lg shadow-md p-6 mb-6 max-w-2xl white-text">
-            <div class="flex justify-between items-center mb-4">
-                <div>
-                    <h2 class="text-xl font-bold">Match Date: {{ $ticket->match->date }}</h2>
-                    <p class="text-gray-600 flex items-center">
-                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($ticket->match->team1->flag))) }}" alt="{{ $ticket->match->team1->name }}" class="w-8 h-8 mr-2">
-                        {{ $ticket->match->team1->name }}
-                        <span class="mx-1">&bull;</span>
-                        {{ $ticket->match->team2->name }}
-                        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($ticket->match->team2->flag))) }}" alt="{{ $ticket->match->team2->name }}" class="w-8 h-8 ml-2">
-                    </p>
-                </div>
-                <div class="flex items-center">
+            <div class="ticket-content">
+                <div class="flex justify-between items-center mb-4">
                     <div>
-                        <p class="text-lg font-semibold"><i class="fas fa-map-marker-alt mr-2"></i> Stadium:
-                            {{ $ticket->match->stadium->name }}</p>
-                        <p class="text-lg font-semibold"><i class="fas fa-clock mr-2"></i> Match Time:
-                            {{ $ticket->match->time }}</p>
-                        <p class="text-lg font-semibold"><i class="fas fa-money-bill mr-2"></i> Price:
-                            {{ $ticket->match->price }}</p>
+                        <h2 class="text-xl font-bold">Match Date: {{ $ticket->match->date }}</h2>
+                        <p class="text-gray-600 flex items-center">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($ticket->match->team1->flag))) }}" alt="{{ $ticket->match->team1->name }}" class="w-8 h-8 mr-2">
+                            {{ $ticket->match->team1->name }}
+                            <span class="mx-1">&bull;</span>
+                            {{ $ticket->match->team2->name }}
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($ticket->match->team2->flag))) }}" alt="{{ $ticket->match->team2->name }}" class="w-8 h-8 ml-2">
+                        </p>
                     </div>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=YourDataHere" alt="QR Code" class="w-16 h-16 ml-6">
+                    <div class="flex items-center">
+                        <div>
+                            <p class="text-lg font-semibold"><i class="fas fa-map-marker-alt mr-2"></i> Stadium:
+                                {{ $ticket->match->stadium->name }}</p>
+                            <p class="text-lg font-semibold"><i class="fas fa-clock mr-2"></i> Match Time:
+                                {{ $ticket->match->time }}</p>
+                            <p class="text-lg font-semibold"><i class="fas fa-money-bill mr-2"></i> Price:
+                                {{ $ticket->match->price }}</p>
+                        </div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=YourDataHere" alt="QR Code" class="w-16 h-16 ml-6">
+                    </div>
                 </div>
             </div>
         </div>
         @endforeach
 
-        <!-- Formulaire de téléchargement du PDF -->
-        <form action="{{ route('tickets.download-pdf', ['ticket_id' => $tickets[0]->id]) }}" method="POST" class="text-center">
-            @csrf
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Télécharger le PDF</button>
-        </form>
+        <!-- Bouton pour imprimer le ticket -->
+        <button onclick="window.print()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded print-button">Imprimer le ticket</button>
 
     </div>
 </body>

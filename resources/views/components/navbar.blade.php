@@ -29,13 +29,27 @@
                         </span>
                     </button>
                 </div></li>
-                <li class="mx-2"><a href="{{route('home')}}" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
+                @auth
+                @if (auth()->user()->role == 'admin')
+                    <li class="mx-2"><a href="{{route('dashboard')}}" class="text-yellow-400 hover:text-yellow-400">Dashboard</a></li>
+                @else
+                    <li class="mx-2"><a href="{{ route('home') }}" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
+                @endif
+            @else
+                <!-- Si l'utilisateur n'est pas authentifié, vous pouvez afficher ici les éléments de navigation pour les utilisateurs non authentifiés -->
+            @endauth
+            
+           
+           @if(auth()->user())
                 <li class="mx-2"><a href="{{ route('matches.index') }}" class="text-yellow-400 hover:text-yellow-400">Matches</a></li>
                 <li class="mx-2"><a href="{{ route('teams.index') }}" class="text-yellow-400 hover:text-yellow-400">Teams</a></li>
                 <li class="mx-2"><a href="{{route('stadiums.index')}}" class="text-yellow-400 hover:text-yellow-400">Stadiums</a></li>
                 <li class="mx-2"><a href="{{ route('matches.results') }}" class="text-yellow-400 hover:text-yellow-400">Match results</a></li>
                 <li class="mx-2"><a href="{{route('articles.index')}}" class="text-yellow-400 hover:text-yellow-400">Articles</a></li>
-              
+             @else
+                <li class="mx-2"><a href="{{ route('home') }}" class="text-yellow-400 hover:text-yellow-400">Home</a></li>
+               
+              @endif
             </ul>
             <div class="nav-auth-buttons">
                 @auth
