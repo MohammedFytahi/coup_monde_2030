@@ -1,6 +1,11 @@
         <x-app :title="'Articles'">
-
+          
             <section id="search-results" class="players">
+                @if (auth()->user() && auth()->user()->role == 'admin')
+                <a id="addMatchBtn"
+                    class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25"
+                    href="{{route('articles.create')}}"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Add New Article</a>
+                    @endif
                 @foreach ($articles as $article)
                     <article class="player hover:bg-black hover:text-white rounded-lg transition-all top-0 hover:scale-110">
                         <img src="{{ asset($article->image) }}" alt="{{ $article->title }}" class="mx-auto">
@@ -78,18 +83,17 @@
                                 },
                                 body: JSON.stringify({
                                     liked: !isLiked
-                                }) // Envoyer l'état de like actuel
+                                }) 
                             })
                             .then(response => response.json())
                             .then(data => {
                                 if (data.message === 'Likes updated successfully') {
-                                    button.classList.toggle('liked'); // Basculer l'état de like du bouton
+                                    button.classList.toggle('liked'); 
                                     const likesCount = button.querySelector('.likes-count');
                                     const newLikes = isLiked ? parseInt(likesCount.textContent) - 1 : parseInt(
                                         likesCount.textContent) + 1;
                                     likesCount.textContent =
-                                    newLikes; // Mettre à jour le nombre de likes affiché
-                                    // Appel de la fonction pour mettre à jour le nombre de likes
+                                    newLikes; 
                                     updateLikesCount(articleId);
                                 }
                             })
@@ -218,8 +222,7 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.message === 'Article deleted successfully') {
-                                // Mettez en œuvre la logique pour supprimer l'article du DOM ou actualiser la page
-                                window.location.reload(); // Actualisez la page après la suppression
+                                window.location.reload(); 
                             }
                         })
                         .catch(error => {

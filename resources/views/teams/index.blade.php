@@ -69,10 +69,10 @@
                     @if (auth()->user() && auth()->user()->role == 'admin')
                     <div class="icon-container" style=" z-index: 2; ">
                         <a href=""><i class="fas fa-edit"></i></a>
-                        <a href=" " onclick="event.preventDefault(); document.getElementById('delete-form-{{ $team->id }}').submit();"><i class="fas fa-trash"></i></a>
-                        <form id="delete-form-{{ $team->id }}" action="" method="POST" style="display: none;">
+                        <form action="{{ route('teamdestroy', ['team' => $team->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
+                            <button type="submit">delet</button>    
                         </form>
                     </div>
                     @endif
@@ -82,28 +82,6 @@
             </div>
         </section>
     </div>
-
-    
-
-
-{{-- <div id="editTeamModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Modifier l'équipe</h2>
-        <form action="" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <label for="name">Nom de l'équipe:</label>
-            <input type="text" id="name" name="name" value="{{ $team->name }}" required>
-            <label for="country">Pays:</label>
-            <input type="text" id="country" name="country" value="{{ $team->country }}" required>
-            <label for="flag">Drapeau:</label>
-            <input type="file" id="flag" name="flag">
-            <button type="submit">Modifier</button>
-        </form>
-    </div>
-</div> --}}
-
 
 </x-app>
 
@@ -115,9 +93,9 @@
     enterpriseCards.forEach(function(card) {
         var nom = card.getAttribute('data-nom').toLowerCase();
         if (nom.includes(searchTerm)) {
-            card.classList.remove('hidden'); // Retire la classe 'hidden' pour afficher la carte
+            card.classList.remove('hidden'); 
         } else {
-            card.classList.add('hidden'); // Ajoute la classe 'hidden' pour masquer la carte
+            card.classList.add('hidden'); 
         }
     });
 });
@@ -127,13 +105,13 @@ function openEditModal() {
     modal.style.display = 'block';
 }
 
-// Fonction pour fermer la modal
+
 function closeEditModal() {
     var modal = document.getElementById('editTeamModal');
     modal.style.display = 'none';
 }
 
-// Fermer la modal lorsque l'utilisateur clique en dehors de celle-ci
+
 window.onclick = function(event) {
     var modal = document.getElementById('editTeamModal');
     if (event.target == modal) {

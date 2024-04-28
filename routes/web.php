@@ -22,6 +22,7 @@ use App\Http\Controllers\LikeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::delete('/team/delete/{team}', [TeamController::class, 'destroy'])->name('teamdestroy');
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,7 +31,7 @@ Route::get('/', function () {
 Route::middleware('role:admin')->group(function () {
     Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
     Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
-    Route::delete('/teams/{team}', [TeamController::class,'destroy'])->name('teams.destroy');
+  
 Route::put('/teams/{team}', [TeamController::class,'update'])->name('teams.update');
 
 

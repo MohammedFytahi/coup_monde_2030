@@ -1,5 +1,4 @@
     <style>
-        /* Custom CSS for styling */
         .match-card {
             transition: all 0.3s ease-in-out;
         }
@@ -76,10 +75,11 @@
             <div class="container mx-auto px-4 py-8">
                 <h2 class="text-3xl font-bold mb-4">Matches</h2>
 
-
+                @if (auth()->user() && auth()->user()->role == 'admin')
                 <a id="addMatchBtn"
                     class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all bg-transparent rounded-lg cursor-pointer leading-pro text-xs ease-soft-in shadow-soft-md bg-150 bg-gradient-to-tl from-gray-900 to-slate-800 hover:shadow-soft-xs active:opacity-85 hover:scale-102 tracking-tight-soft bg-x-25"
                     href="javascript:;"> <i class="fas fa-plus"> </i>&nbsp;&nbsp;Add New Card</a>
+                    @endif
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @foreach ($matches as $match)
                         <div class=" match-card   glass shadow-xl overflow-hidden shadow-md">
