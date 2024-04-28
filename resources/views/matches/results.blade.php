@@ -2,7 +2,7 @@
     <style>.score {
     font-weight: bold;
     font-size: 18px;
-    color: #333; /* couleur de texte souhaitée */
+    color: #333; 
 }</style>
     <section class="flexible mt-30" style=" margin-top:10px ">
         <div class="fixture-header" style="position:sticky;">

@@ -4,25 +4,21 @@
         <h1 class="text-3xl font-bold mb-8">Dashboard</h1>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Statistique: Nombre d'articles -->
+          
             <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
                 <h2 class="text-xl font-semibold mb-4">Nombre d'articles</h2>
                 <canvas id="articleChart" width="400" height="200"></canvas>
             </div>
-
-            <!-- Statistique: Nombre de matchs -->
             <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
                 <h2 class="text-xl font-semibold mb-4">Nombre de matchs</h2>
                 <canvas id="matchChart" width="400" height="200"></canvas>
             </div>
-
-            <!-- Statistique: Nombre d'équipes -->
             <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
                 <h2 class="text-xl font-semibold mb-4">Nombre d'équipes</h2>
                 <canvas id="teamChart" width="400" height="200"></canvas>
             </div>
 
-            <!-- Statistique: Nombre d'utilisateurs -->
+            
             <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
                 <h2 class="text-xl font-semibold mb-4">Nombre d'utilisateurs</h2>
                 <canvas id="userChart" width="400" height="200"></canvas>
@@ -43,7 +39,7 @@
             </div>
         </div>
 
-        <!-- Statistique: Article avec le plus de likes et de commentaires -->
+     
         <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between animate__animated animate__fadeIn">
             <h2 class="text-xl font-semibold mb-4">Article avec le plus de likes et de commentaires</h2>
             <div class="flex items-center mb-2">
@@ -65,7 +61,7 @@
     </div>
 
     <script>
-        // Article Chart
+       
         var articleChartCtx = document.getElementById('articleChart').getContext('2d');
         var articleChart = new Chart(articleChartCtx, {
             type: 'bar',
@@ -91,7 +87,7 @@
             }
         });
 
-        // Match Chart
+        
         var matchChartCtx = document.getElementById('matchChart').getContext('2d');
         var matchChart = new Chart(matchChartCtx, {
             type: 'bar',
@@ -117,7 +113,7 @@
             }
         });
 
-        // Team Chart
+       
         var teamChartCtx = document.getElementById('teamChart').getContext('2d');
         var teamChart = new Chart(teamChartCtx, {
             type: 'bar',
@@ -143,7 +139,7 @@
             }
         });
 
-        // User Chart
+
         var userChartCtx = document.getElementById('userChart').getContext('2d');
         var userChart = new Chart(userChartCtx, {
             type: 'bar',

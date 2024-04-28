@@ -6,7 +6,7 @@
         <button type="submit">Ajouter un commentaire</button>
     </form>
     <div id="comments">
-        <!-- Les commentaires seront affichés ici -->
+  
     </div>
 
     <script>
@@ -24,15 +24,15 @@
     })
     .then(response => response.json())
     .then(data => {
-        // Gérer la réponse du serveur
+   
         if (data.success) {
-            // Ajouter le nouveau commentaire à la liste des commentaires sans rafraîchir la page
+
             const commentsDiv = document.getElementById('comments');
             const newCommentDiv = document.createElement('div');
-            newCommentDiv.textContent = formData.get('content'); // ou data.content si le serveur renvoie le contenu du commentaire
+            newCommentDiv.textContent = formData.get('content'); 
             commentsDiv.appendChild(newCommentDiv);
             
-            // Effacer le contenu du champ de commentaire après l'ajout
+
             document.querySelector('#commentForm textarea').value = '';
         } else {
             console.error('Erreur lors de l\'ajout du commentaire :', data.errors);

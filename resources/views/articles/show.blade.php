@@ -20,7 +20,6 @@
         <p class="text-lg mt-8">No comments yet.</p>
     @endif
 
-    <!-- Form to add a new comment -->
     <form action="{{ route('articles.comments.add', ['articleId' => $article->id]) }}" method="POST" class="mt-8">
         @csrf
         <textarea name="content" placeholder="Enter your comment here" required class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"></textarea>

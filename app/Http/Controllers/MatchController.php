@@ -98,9 +98,7 @@ public function create_result($matchId)
 
     private function calculateResult($team1Score, $team2Score)
     {
-        // Vous pouvez ajouter votre logique pour déterminer le résultat du match ici
-        // Par exemple, si $team1Score > $team2Score, alors "Team 1 Wins", etc.
-        // Je vais laisser cela comme une simple logique de comparaison pour l'exemple
+       
 
         if ($team1Score > $team2Score) {
             return 'Team 1 Wins';
@@ -116,16 +114,16 @@ public function create_result($matchId)
        
         $matches =  Matche::has('matchResults')->findOrFail($id);
 
-        // Retourner la vue avec les détails du résultat du match
+     
         return view('matches.show', ['matches' => $matches]);
     }
 
     public function showResults()
     {
-        // Récupérer tous les matchs avec les résultats
+
         $matches = Matche::has('matchResults')->get();
 
-        // Retourner la vue avec les données des matchs
+ 
         return view('matches.results', ['matches' => $matches]);
     }
 }

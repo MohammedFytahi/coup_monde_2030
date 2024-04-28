@@ -13,12 +13,8 @@ use Dompdf\Options;
 class TicketController extends Controller
 {
 
-    // public function ticketConfirmation($ticket_id)
-    // {
-    //     $tickets = Ticket::findOrFail($ticket_id);
-
-    //     return view('tickets.ticket-confirmation', compact('tickets'));
-    // }
+   
+   
 public function reserveTicket(Request $request, $match_id)
 {
     $match = Matche::findOrFail($match_id);

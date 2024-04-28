@@ -23,7 +23,7 @@ public function addComment(Request $request, $articleId)
 
     $comment = new Comment();
     $comment->article_id = $articleId;
-    $comment->user_id = auth()->user()->id; // Assuming you have authentication
+    $comment->user_id = auth()->user()->id; 
     $comment->content = $validatedData['content'];
     $comment->save();
 

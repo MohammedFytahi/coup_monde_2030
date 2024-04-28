@@ -12,22 +12,22 @@ class AdminController extends Controller
 {
     public function index()
     {
-        // Nombre d'articles
+        
         $numberOfArticles = Article::count();
 
-        // Nombre de matchs
+        
         $numberOfMatches = Matche::count();
 
-        // Nombre d'équipes
+       
         $numberOfTeams = Team::count();
 
-        // Nombre d'utilisateurs
+       
         $numberOfUsers = User::count();
 
-        // Utilisateur avec le plus de commentaires
+       
         $userWithMostComments = User::withCount('comments')->orderByDesc('comments_count')->first();
 
-        // Article avec le plus de likes et de commentaires
+
         $articleWithMostLikesAndComments = Article::withCount(['likes', 'comments'])->orderByDesc('likes_count')->orderByDesc('comments_count')->first();
         
 

@@ -84,8 +84,6 @@
         </div>
         @endforeach
 
-        <!-- Bouton pour imprimer le ticket -->
-        <button onclick="window.print()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded print-button">Imprimer le ticket</button>
 
     </div>
 </body>

@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Dans votre vue -->
+
                 @foreach ($stadiums as $stadium)
                     <tr class="hover:bg-gray-100 transition duration-300 ease-in-out">
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -141,7 +141,7 @@
         modal.classList.add('hidden');
     }
 
-// Dans votre script JavaScript
+
 function deleteStadium(id) {
     if (confirm("Are you sure you want to delete this stadium?")) {
         fetch('/stadiums/' + id, {
@@ -153,7 +153,7 @@ function deleteStadium(id) {
         })
         .then(response => {
             if (response.ok) {
-                window.location.reload(); // Actualise la page après la suppression
+                window.location.reload(); 
             } else {
                 console.error('Error deleting stadium');
             }

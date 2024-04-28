@@ -118,14 +118,14 @@
                                         <a href="{{ route('match_results.show', $match->id) }}"
                                             class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">
                                             <i class="far fa-eye mr-2"></i>
-                                            <!-- Ajoutez cette ligne pour l'icône d'œil -->
+                                            
 
                                         </a>
                                     @else
                                         <a href="{{ route('match_results.create', $match->id) }}"
                                             class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 ease-in-out mb-2 inline-block">
                                             <i class="fas fa-plus-circle mr-2"></i>
-                                            <!-- Ajoutez cette ligne pour l'icône de plus -->
+                                          
 
                                         </a>
                                     @endif
@@ -183,7 +183,6 @@
             </div>
 
 
-            <!-- Modale pour ajouter un match -->
             <div id="createMatchModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
                 <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -208,7 +207,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <!-- Votre code HTML -->
                             <div class="mb-4">
                                 <label for="team2_id" class="block text-gray-700">Team 2:</label>
                                 <select name="team2_id" id="team2_id" required
@@ -330,10 +328,9 @@
             });
 
             function updateMatchTimer(matchDate, matchId) {
-                // Récupérer l'élément de compteur de temps par son ID
                 var timerElement = document.getElementById('matchTimer' + matchId);
 
-                // Calculer le temps restant jusqu'au début du match
+
                 var currentDate = new Date();
                 var startDate = new Date(matchDate);
                 var timeDiff = startDate.getTime() - currentDate.getTime();
@@ -381,16 +378,15 @@
                 form.classList.toggle('hidden');
             }
 
-            // JavaScript pour écouter les changements dans le premier select et mettre à jour le deuxième select
-document.getElementById('team1_id').addEventListener('change', function() {
-    var team1Id = this.value; // Récupérer la valeur sélectionnée dans le premier select
 
-    // Parcourir les options du deuxième select et les désactiver si elles correspondent à la valeur sélectionnée dans le premier select
+document.getElementById('team1_id').addEventListener('change', function() {
+    var team1Id = this.value; 
+
     document.querySelectorAll('#team2_id option').forEach(function(option) {
         if (option.value === team1Id) {
-            option.disabled = true; // Désactiver l'option si elle correspond à la valeur sélectionnée dans le premier select
+            option.disabled = true; 
         } else {
-            option.disabled = false; // Activer l'option sinon
+            option.disabled = false; 
         }
     });
 });

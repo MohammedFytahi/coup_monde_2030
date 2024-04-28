@@ -39,12 +39,12 @@ class TeamController extends Controller
         $request->validate([
             'name' => 'required|string',
             'country' => 'required|string',
-            'flag' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Ajout de la validation pour le drapeau
+            'flag' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
     
         $teamData = $request->except('flag');
     
-        // Traitement de l'image du drapeau
+      
         if ($request->hasFile('flag')) {
             $image = $request->file('flag');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
