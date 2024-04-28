@@ -71,7 +71,10 @@ Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('a
 Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
 
 
+Route::middleware('auth')->group(function (){
+    
 
+});
 
 
 Route::post('/articles/{articleId}/like',[LikeController::class,'toggleLike'] )->middleware('auth');

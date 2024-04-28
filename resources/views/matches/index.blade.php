@@ -61,17 +61,7 @@
 
     <body class="bg-gray-100 font-sans">
         <x-app title="Matches">
-            <div class="flex justify-center mb-4">
-                <button onclick="filterMatchesByStatus('all')"
-                    class="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">All</button>
-                <button onclick="filterMatchesByStatus('not-played-yet')"
-                    class="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Not
-                    Played Yet</button>
-                <button onclick="filterMatchesByStatus('playing')"
-                    class="mr-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Playing</button>
-                <button onclick="filterMatchesByStatus('played')"
-                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">Played</button>
-            </div>
+            
             <div class="container mx-auto px-4 py-8">
                 <h2 class="text-3xl font-bold mb-4">Matches</h2>
 
